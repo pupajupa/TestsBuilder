@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TestsBuilder.Views.CreateExpressionsPage"
+             Shell.TitleColor="#99B5EB"
+             Shell.BackgroundColor="#99B5EB"
+             BackgroundColor="#D9E0ED">
+    <Shell.TitleView>
+        <StackLayout Orientation="Horizontal" Padding="0,0,40,0">
+            <Button Text="Личный кабинет" Clicked="Profile_Clicked" BackgroundColor="Transparent" TextColor="Black" FontSize="18" HorizontalOptions="EndAndExpand"/>
+            <Button Text="Тесты" Clicked="Tests_Clicked" BackgroundColor="Transparent" TextColor="Black" FontSize="18"/>
+            <Button Text="Материалы" Clicked="Materials_Clicked" BackgroundColor="Transparent" TextColor="Black" FontSize="18"/>
+        </StackLayout>
+    </Shell.TitleView>
+    <StackLayout Padding="5" HorizontalOptions="CenterAndExpand">
+        <Label Text="{Binding ExpName}" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Start"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
+            <Button Text="+" BorderColor="Gray" Grid.Row="0" Grid.Column="6" BackgroundColor="White" Clicked="Button_Clicked"
+                    TextColor="Black" FontSize="30" BorderWidth="1" Margin="0,0,10,0" HeightRequest="45" WidthRequest="45" FontFamily="TexRegular" VerticalOptions="Center" />
+
+            <Button Text="a" BorderColor="Gray" Grid.Row="0" Grid.Column="1" BackgroundColor="White" Clicked="Button_Clicked"
+                    TextColor="Black" FontSize="30" BorderWidth="1" Margin="0,0,10,0" HeightRequest="45" WidthRequest="45" FontFamily="TexRegular" Padding="0,0,0,7"/>
+
+            <Button Text="b"  BorderColor="Gray" Grid.Row="0" Grid.Column="2" BackgroundColor="White" Clicked="Button_Clicked"
+                    TextColor="Black" FontSize="30" BorderWidth="1" Margin="0,0,10,0" HeightRequest="45" WidthRequest="45" FontFamily="TexRegular" Padding="0,0,0,7"/>
+
+            <Button Text="x" BorderColor="Gray" Grid.Row="0" Grid.Column="3" BackgroundColor="White" Clicked="Button_Clicked"
+                    TextColor="Black" FontSize="30" BorderWidth="1" Margin="0,0,10,0" HeightRequest="45" WidthRequest="45" FontFamily="TexRegular" Padding="0,0,0,7"/>
+
+            <Button Text=">" BorderColor="Gray" Grid.Row="0" Grid.Column="4" BackgroundColor="White" Clicked="Button_Clicked"
+                    TextColor="Black" FontSize="30" BorderWidth="1" Margin="0,0,10,0" HeightRequest="45" WidthRequest="45" FontFamily="TexRegular" Padding="3,0,0,7"/>
+
+            <Button Text="&lt;" BorderColor="Gray" Grid.Row="0" Grid.Column="5" BackgroundColor="White" Clicked="Button_Clicked"
+                    TextColor="Black" FontSize="30" BorderWidth="1" Margin="0,0,10,0" HeightRequest="45" WidthRequest="45" FontFamily="TexRegular" Padding="0,0,0,7"/>
+
+            <ImageButton Source="integral.png"  BorderColor="Gray" Grid.Row="0" Grid.Column="0" BackgroundColor="White" CornerRadius="7" Clicked="IntegralButton_Clicked"
+                    BorderWidth="1" Margin="0,0,10,0" HeightRequest="45" WidthRequest="45" Padding="5"/>
+
+            <Button Text="-" BorderColor="Gray" Grid.Row="0" Grid.Column="6" BackgroundColor="White" Clicked="Button_Clicked"
+                    TextColor="Black" FontSize="30" BorderWidth="1" Margin="0,0,10,0" HeightRequest="45" WidthRequest="45" FontFamily="TexRegular"/>
+
+            <Button Text="*" BorderColor="Gray" Grid.Row="0" Grid.Column="7" BackgroundColor="White" Clicked="Button_Clicked"
+                    TextColor="Black" FontSize="30" BorderWidth="1" Margin="0,0,10,0" HeightRequest="45" WidthRequest="45" FontFamily="TexRegular"/>
+
+            <Button Text="/" BorderColor="Gray" Grid.Row="0" Grid.Column="8" BackgroundColor="White" Clicked="Button_Clicked"
+                    TextColor="Black" FontSize="30" BorderWidth="1" Margin="0,0,10,0" HeightRequest="45" WidthRequest="45" FontFamily="TexRegular" Padding="0,0,0,5"/>
+
+            <Button Text="=" BorderColor="Gray" Grid.Row="0" Grid.Column="9" BackgroundColor="White" Clicked="Button_Clicked"
+                    TextColor="Black" FontSize="30" BorderWidth="1" Margin="0,0,10,0" HeightRequest="45" WidthRequest="45" FontFamily="TexRegular" Padding="2,0,0,7"/>
+
+            <ImageButton Source="root.png" BorderColor="Gray" Grid.Row="1" Grid.Column="1" BackgroundColor="White" CornerRadius="7" Clicked="RootButton_Clicked"
+                    BorderWidth="1" Margin="0,0,10,0" HeightRequest="45" WidthRequest="45" Padding="3"/>
+
+            <ImageButton Source="degree.png" BorderColor="Gray" Grid.Row="1" Grid.Column="0" BackgroundColor="White" CornerRadius="7" Clicked="DegreeButton_Clicked" 
+                     BorderWidth="1" Margin="0,0,10,0" HeightRequest="45" WidthRequest="45" Padding="10"/>
+
+            <Button Text=""  BorderColor="Gray" Grid.Row="1" Grid.Column="5" BackgroundColor="White" Clicked="Button_Clicked"
+                    TextColor="Black" FontSize="30" BorderWidth="1" Margin="0,0,10,0" HeightRequest="45" WidthRequest="45" FontFamily="TexRegular"/>
+
+            <Button Text="" BorderColor="Gray" Grid.Row="1" Grid.Column="6" BackgroundColor="White" Clicked="Button_Clicked"
+                    TextColor="Black" FontSize="30" BorderWidth="1" Margin="0,0,10,0" HeightRequest="45" WidthRequest="45" FontFamily="TexRegular"/>
+
+            <Button Text="" BorderColor="Gray" Grid.Row="1" Grid.Column="4" BackgroundColor="White" Clicked="Button_Clicked"
+                    TextColor="Black" FontSize="30" BorderWidth="1" Margin="0,0,10,0" HeightRequest="45" WidthRequest="45" FontFamily="TexRegular"/>
+
+            <Button Text="(" BorderColor="Gray" Grid.Row="1" Grid.Column="2" BackgroundColor="White" Padding="0,0,0,6" Clicked="Button_Clicked"
+                    TextColor="Black" FontSize="30" BorderWidth="1" Margin="0,0,10,0" HeightRequest="45" WidthRequest="45" FontFamily="TexRegular"/>
+
+            <Button Text=")" BorderColor="Gray" Grid.Row="1" Grid.Column="3" BackgroundColor="White" Padding="0,0,0,6" Clicked="Button_Clicked"
+                    TextColor="Black" FontSize="30" BorderWidth="1" Margin="0,0,10,0" HeightRequest="45" WidthRequest="45" FontFamily="TexRegular"/>
+
+            <Button Text="" BorderColor="Gray" Grid.Row="1" Grid.Column="7" BackgroundColor="White" Padding="0,0,0,6" Clicked="Button_Clicked"
+                    TextColor="Black" FontSize="30" BorderWidth="1" Margin="0,0,10,0" HeightRequest="45" WidthRequest="45" FontFamily="TexRegular"/>
+
+            <Button Text="" BorderColor="Gray" Grid.Row="1" Grid.Column="8" BackgroundColor="White" Clicked="Button_Clicked"
+                    TextColor="Black" FontSize="30" BorderWidth="1" Margin="0,0,10,0" HeightRequest="45" WidthRequest="45" FontFamily="TexRegular"/>
+
+            <Button Text="" BorderColor="Gray" Grid.Row="1" Grid.Column="9" BackgroundColor="White" Clicked="Button_Clicked"
+                    TextColor="Black" FontSize="30" BorderWidth="1" Margin="0,0,10,0" HeightRequest="45" WidthRequest="45"  FontFamily="TexRegular"/>
+
+        </Grid>
+        <Grid Margin="20,10,30,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Grid.Column="0">
+                <Entry  x:Name="AMin" WidthRequest="60"  HeightRequest="30" FontSize="25" BackgroundColor="White" TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                <Label Text="&lt; a &lt;" VerticalOptions="Center" FontAttributes="Bold" Margin="5,0,5,0" TextColor="Black" FontSize="30" VerticalTextAlignment="Center"/>
+                <Entry  x:Name="AMax" WidthRequest="60" HeightRequest="30" FontSize="25" BackgroundColor="White" TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="End" Grid.Column="1">
+                <Entry x:Name="BMin" WidthRequest="60"  HeightRequest="30" FontSize="25" BackgroundColor="White" TextColor="Black"/>
+                <Label Text="&lt; b &lt;" VerticalOptions="Center" FontAttributes="Bold" Margin="5,0,5,0" TextColor="Black" FontSize="30"/>
+                <Entry  x:Name="BMax" WidthRequest="60" HeightRequest="30" TextColor="Black" FontSize="25" BackgroundColor="White"/>
+            </StackLayout>
+        </Grid>
+        <Frame BorderColor="Gray" CornerRadius="10" BackgroundColor="White" Margin="0,20,10,0" >
+            <Entry x:Name="equationEntry" Placeholder="Введите уравнение" Text="" Margin="0,10,0,10" BackgroundColor="White" FontFamily="TexRegular" TextColor="Black" FontSize="40"/>
+        </Frame>
+        <Button Margin="0,20,0,0" Text="Сгенерировать варианты" Clicked="SaveButton_Clicked" TextColor="Black" FontSize="30"/>
+    </StackLayout>
+</ContentPage>

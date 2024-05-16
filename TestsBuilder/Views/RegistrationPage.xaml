@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TestsBuilder.Views.RegistrationPage"
+             BackgroundColor="#D9E0ED">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.25*"/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.25*"/>
+        </Grid.ColumnDefinitions>
+        <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
+            <Label Text="Зарегистрируйтесь!" TextColor="Black" FontSize="32" Grid.Column="1" HorizontalTextAlignment="Center" Margin="0,100,0,50"/>
+            <HorizontalStackLayout Grid.Column="1">
+                <Label Text="Введите имя" FontSize="20" VerticalOptions="Center" TextColor="Black" Margin="0,0,64,0"/>
+                <Border Stroke="Black"
+                    StrokeThickness="1"
+                    Background="#7D90D7"
+                    Padding="0,-3"
+                    HorizontalOptions="Center"
+                    HeightRequest="30">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20,20,20,20" />
+                    </Border.StrokeShape>
+                    <Entry x:Name="FirstNameEntry" BackgroundColor="#7D90D7" WidthRequest="250" HeightRequest="10" FontSize="17" VerticalTextAlignment="Start" VerticalOptions="Center" Placeholder="Имя..."/>
+                </Border>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Grid.Column="1" Margin="0,20,0,0">
+                <Label Text="Введите фамилию" FontSize="20" VerticalOptions="Center" TextColor="Black" Margin="0,0,10,0"/>
+                <Border Stroke="Black"
+                    StrokeThickness="1"
+                    Background="#7D90D7"
+                    Padding="0,-7"
+                    HorizontalOptions="Center"
+                    HeightRequest="30">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20,20,20,20" />
+                    </Border.StrokeShape>
+                    <Entry x:Name="LastNameEntry" BackgroundColor="#7D90D7" WidthRequest="250" HeightRequest="10" FontSize="17" VerticalTextAlignment="Center" VerticalOptions="Center" Placeholder="Фамилия..."/>
+                </Border>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Grid.Column="1" Margin="0,20,0,0">
+                <Label Text="Введите login" FontSize="20" VerticalOptions="Center" TextColor="Black" Margin="0,0,58,0"/>
+                <Border Stroke="Black"
+                    StrokeThickness="1"
+                    Background="#7D90D7"
+                    Padding="0,-7"
+                    HorizontalOptions="Center"
+                    HeightRequest="30">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20,20,20,20" />
+                    </Border.StrokeShape>
+                    <Entry x:Name="LoginEntry" BackgroundColor="#7D90D7" WidthRequest="250" HeightRequest="10" FontSize="17" VerticalTextAlignment="Center" VerticalOptions="Center" Placeholder="Логин..."/>
+                </Border>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Grid.Column="1" Margin="0,20,0,0">
+                <Label Text="Введите пароль" FontSize="20" VerticalOptions="Center" TextColor="Black" Margin="0,0,32,0"/>
+                <Border Stroke="Black"
+                    StrokeThickness="1"
+                    Background="#7D90D7"
+                    Padding="0,-7"
+                    HorizontalOptions="Center"
+                    HeightRequest="30">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20,20,20,20" />
+                    </Border.StrokeShape>
+                    <Entry x:Name="PasswordEntry" BackgroundColor="#7D90D7" WidthRequest="250" HeightRequest="10" FontSize="17" VerticalTextAlignment="Center" VerticalOptions="Center" IsPassword="True" Placeholder="Пароль..."/>
+                </Border>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Grid.Column="1" Margin="0,20,0,0">
+                <Label Text="Повторите пароль" FontSize="20" VerticalOptions="Center" TextColor="Black" Margin="0,0,8,0"/>
+                <Border Stroke="Black"
+                    StrokeThickness="1"
+                    Background="#7D90D7"
+                    Padding="0,-7"
+                    HorizontalOptions="Center"
+                    HeightRequest="30">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20,20,20,20" />
+                    </Border.StrokeShape>
+                    <Entry x:Name="ReenterPasswordEntry" BackgroundColor="#7D90D7" WidthRequest="250" HeightRequest="10" FontSize="17" VerticalTextAlignment="Center" VerticalOptions="Center" IsPassword="True" Placeholder="Повтор пароля..."/>
+                </Border>
+            </HorizontalStackLayout>
+            <Border Stroke="Black"
+                    StrokeThickness="1"
+                    Background="#7D90D7"
+                    Padding="0,-17"
+                    HorizontalOptions="Center"
+                    HeightRequest="45"
+                    Margin="0,30,0,0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20,20,20,20" />
+                </Border.StrokeShape>
+                <Button Text="Регистрация" FontAttributes="Bold" FontSize="22" TextColor="Black" BackgroundColor="#435DBC" WidthRequest="250" Clicked="Registration_Clicked"></Button>
+            </Border>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

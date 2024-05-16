@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TestsBuilder.Views.StartPage"
+             BackgroundColor="#99B5EB">
+    <VerticalStackLayout Margin="40,0,20,0">
+        <HorizontalStackLayout>
+            <Border Stroke="Black"
+                StrokeThickness="3"
+                Background="#DFE4F5"
+                Padding="0,-3"
+                WidthRequest="220"
+                HeightRequest="190"
+                VerticalOptions="Start"
+                HorizontalOptions="Start"
+                Margin="170,100,0,150">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20,20,20,20" />
+                </Border.StrokeShape>
+                <Grid HorizontalOptions="Center">
+                    <Image Source="integral.png"
+                       HeightRequest="130"
+                       Aspect="AspectFit"
+                       Margin="0,0,70,0" />
+                    <Label FontFamily="AkayaKanadakaRegular" 
+                       FontAttributes="Bold"
+                       Text="xdx" 
+                       TextColor="Black" 
+                       FontSize="65" 
+                       HorizontalTextAlignment="Start"  
+                       VerticalTextAlignment="Center" 
+                       Margin="50,20,0,0"
+                       Grid.Row="0"
+                       Grid.Column="0" />
+                </Grid>
+            </Border>
+            <Label Text="Test" FontSize="90" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center" Margin="30,0,0,150"/>
+            <Label Text="Builder" FontSize="90" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center" Margin="-40,30,0,0"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Start">
+            <Border Stroke="Black"
+                    StrokeThickness="1"
+                    Background="#7D90D7"
+                    Padding="0,-17"
+                    HorizontalOptions="Center"
+                    HeightRequest="45"
+                    Margin="-20,0,50,0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20,20,20,20" />
+                </Border.StrokeShape>
+                <Button Text="Вход" FontAttributes="Bold" FontSize="22" TextColor="Black" BackgroundColor="#435DBC" WidthRequest="300" Clicked ="Login_Clicked"></Button>
+            </Border>
+            <Border Stroke="Black"
+                    StrokeThickness="1"
+                    Background="#7D90D7"
+                    Padding="0,-17"
+                    HorizontalOptions="Center"
+                    HeightRequest="45"
+                    Margin="0,0,0,0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20,20,20,20" />
+                </Border.StrokeShape>
+                <Button Text="Регистрация" FontAttributes="Bold" FontSize="22" TextColor="Black" BackgroundColor="#435DBC" WidthRequest="300" Clicked ="Registration_Clicked"></Button>
+            </Border>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

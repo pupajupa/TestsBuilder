@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="TestsBuilder.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:TestsBuilder"
+    Shell.FlyoutBehavior="Disabled"
+    xmlns:view ="clr-namespace:TestsBuilder.Views">
+
+    <ShellContent
+        ContentTemplate="{DataTemplate view:StartPage}"
+        Route="StartPage" />
+    
+    <ShellContent
+        ContentTemplate="{DataTemplate view:LoginPage}"
+        Route="LoginPage" />
+
+    <ShellContent
+        ContentTemplate="{DataTemplate view:TestsPage}"
+        Route="TestsPage" />
+
+    <ShellContent
+        ContentTemplate="{DataTemplate view:RegistrationPage}"
+        Route="RegistrationPage" />
+    
+    <ShellContent
+        ContentTemplate="{DataTemplate view:ProfilePage}"
+        Route="ProfilePage" />
+    
+    <ShellContent
+        ContentTemplate="{DataTemplate view:VariantsPage}"
+        Route="VariantsPage"/>
+
+    <ShellContent
+        ContentTemplate="{DataTemplate view:CreateExpressionsPage}"
+        Route="CreateExpressionsPage"/>
+
+    <ShellContent
+        ContentTemplate="{DataTemplate view:ExpressionsPage}"
+        Route="ExpressionsPage"/>
+
+    <ShellContent
+        ContentTemplate="{DataTemplate view:VariantDetailPage}"
+        Route="VariantDetailPage"/>
+</Shell>

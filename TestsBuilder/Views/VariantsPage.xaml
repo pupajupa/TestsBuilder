@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TestsBuilder.Views.VariantsPage"
+             Shell.TitleColor="#99B5EB"
+             Shell.BackgroundColor="#99B5EB"
+             BackgroundColor="#D9E0ED">
+    <Shell.TitleView>
+        <StackLayout Orientation="Horizontal" Padding="0,0,40,0">
+            <Button Text="Личный кабинет" Clicked="Profile_Clicked" BackgroundColor="Transparent" TextColor="Black" FontSize="18" HorizontalOptions="EndAndExpand"/>
+            <Button Text="Тесты" Clicked="Tests_Clicked" BackgroundColor="Transparent" TextColor="Black" FontSize="18"/>
+            <Button Text="Материалы" Clicked="Materials_Clicked" BackgroundColor="Transparent" TextColor="Black" FontSize="18"/>
+        </StackLayout>
+    </Shell.TitleView>
+    <StackLayout Margin="40,20" Orientation="Vertical">
+        <Label x:Name="titleLabel" FontSize="32" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Center"/>
+        <ListView x:Name="VariantsListView" RowHeight="50" Margin="0,30,0,0" ItemTapped="ExpressionsItemTapped">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="- Вариант " TextColor="Black" FontSize="25"/>
+                            <Label Text="{Binding VariantNumber}" TextColor="Black" FontSize="25"/>
+                            <!-- Другие элементы управления для отображения других свойств варианта -->
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
