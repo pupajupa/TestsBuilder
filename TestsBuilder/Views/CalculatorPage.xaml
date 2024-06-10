@@ -28,9 +28,9 @@
                 Grid.Row="0"
                 Grid.RowSpan="2"
                 Grid.Column="0"/>
-            <Label Text="Ответы:" VerticalOptions="Center" Grid.Row="0" Grid.Column="0"  HorizontalOptions="Center" FontSize="18"/>
+            <Label Text="Ответы:" VerticalOptions="Center" Grid.Row="0" Grid.Column="0"  HorizontalOptions="Center" FontSize="18" TextColor="Black"/>
             <Editor x:Name="AnswersEditor" VerticalOptions="Fill" Grid.Row="1" Grid.Column="0" IsReadOnly="True" HorizontalTextAlignment="Center" FontSize="16"
-                    Text="{Binding NewAnswer}" />
+                    Text="{Binding NewAnswer}" TextColor="Black"/>
 
             <BoxView
                 VerticalOptions="Fill"
@@ -39,8 +39,8 @@
                 Grid.Row="2"
                 Grid.RowSpan="2"
                 Grid.Column="0"/>
-            <Label Text="Ограничения:" VerticalOptions="Center" Grid.Row="2" Grid.Column="0"  HorizontalOptions="Center" FontSize="18"/>
-            <Editor x:Name="ConstraintsEditor" Grid.Row="3" Grid.Column="0" IsReadOnly="True" VerticalOptions="Fill" TextColor="Black" HorizontalTextAlignment="Center" FontSize="16"
+            <Label Text="Ограничения:" TextColor="Black" VerticalOptions="Center" Grid.Row="2" Grid.Column="0"  HorizontalOptions="Center" FontSize="18"/>
+            <Editor Grid.Row="3" Grid.Column="0" TextColor="Black" IsReadOnly="True" VerticalOptions="Fill" HorizontalTextAlignment="Center" FontSize="16"
                     Text="{Binding NewConstraint}" />
         </Grid>
         <Grid

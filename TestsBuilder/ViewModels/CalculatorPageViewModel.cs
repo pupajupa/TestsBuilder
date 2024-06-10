@@ -335,9 +335,16 @@ namespace TestsBuilder.ViewModels
             List<ExampleVariant> variants = generator.GenerateTasksVariant(formulaStr, BaseAnswers.ToList(), ConstraintsList.ToList(), 20, exampleNumber);
             Example.Text = formulaStr;
 
+            foreach (var baseAnswers in BaseAnswers.ToList())
+            {
+                _dbService.AddBaseAnswerToExample(Example.Id, baseAnswers.Text);
+            }
+
             foreach (var variant in variants)
             {
                 var i = 0;
+                _dbService.AddExampleVariant(variant);
+                ExampleVariantsList.Add(variant);
                 foreach (var ans in variant.Answers)
                 {
                     i++;
@@ -347,29 +354,7 @@ namespace TestsBuilder.ViewModels
                         variant.CorrectAnswer = ans.Text;
                     }
                 }
-                _dbService.AddExampleVariant(variant);
-                ExampleVariantsList.Add(variant);
-            };
-
-            //foreach (var answer in BaseAnswers)
-            //{
-            //    _dbService.AddBaseAnswerToExample(Example.Id, answer.Text);
-            //    Example.BaseAnswers.Add(answer);
-            //}
-            //foreach (var variant in variants)
-            //{ 
-            //    var new_var = variant;
-            //    var answers = new_var.Answers;
-            //    foreach (var answer in answers)
-            //    {
-            //        _dbService.AddAnswerToVariant(variant.Id,answer.Text);
-            //    }
-            //    new_var.CorrectAnswer = variant.Answers[exampleNumber].Text;
-            //    new_var.ExampleId = Example.Id;
-            //    _dbService.AddExampleVariant(new_var);
-            //    ExampleVariantsList.Add(new_var);
-            //}
-            //_dbService.UpdateExample(Example);
+            }
             BaseAnswers.Clear();
             ConstraintsList.Clear();
             Formula = new HtmlWebViewSource { Html = "" };
