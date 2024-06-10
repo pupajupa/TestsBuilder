@@ -332,7 +332,7 @@ namespace TestsBuilder.ViewModels
                 await Shell.Current.DisplayAlert("Ошибка", "Номер верного ответа должен быть числом.", "OK");
                 return;
             }
-            List<ExampleVariant> variants = generator.GenerateTasksVariant(formulaStr, BaseAnswers.ToList(), ConstraintsList.ToList(), 20, exampleNumber);
+            List<ExampleVariant> variants = generator.GenerateTasksVariant(formulaStr, BaseAnswers.ToList(), ConstraintsList.ToList(), 20, exampleNumber,Example.Id);
             Example.Text = formulaStr;
 
             foreach (var baseAnswers in BaseAnswers.ToList())

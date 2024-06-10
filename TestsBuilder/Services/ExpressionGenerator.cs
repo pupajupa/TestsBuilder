@@ -10,7 +10,7 @@ namespace TestsBuilder.Services
 {
     public class ExpressionGenerator:IExpressionGenerator
     {
-        public List<ExampleVariant> GenerateTasksVariant(string expression, List<BaseAnswer> answers, List<Constraints> constraints, int numberOfTasks, int correctAnswer)
+        public List<ExampleVariant> GenerateTasksVariant(string expression, List<BaseAnswer> answers, List<Constraints> constraints, int numberOfTasks, int correctAnswer,int exampleId)
         {
             Random random = new Random();
             List<ExampleVariant> generatedTasks = new List<ExampleVariant>();
@@ -19,7 +19,7 @@ namespace TestsBuilder.Services
             {
                 ExampleVariant task = new ExampleVariant();
                 Dictionary<char, int> generatedValues = new Dictionary<char, int>();
-
+                task.ExampleId = exampleId;
                 foreach (var constraint in constraints)
                 {
                     int value;
@@ -76,7 +76,6 @@ namespace TestsBuilder.Services
                     }
                     modifiedAnswers.Add(new Answer { Text = modifiedAnswer, ExampleVariantId = task.Id});
                 }
-
                 task.Answers = modifiedAnswers;
                 task.CorrectAnswer = task.Answers[correctAnswer - 1].Text;
                 task.Number = (i + 1).ToString();

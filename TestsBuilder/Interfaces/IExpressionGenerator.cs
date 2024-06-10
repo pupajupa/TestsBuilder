@@ -9,6 +9,6 @@ namespace TestsBuilder.Interfaces
 {
     public interface IExpressionGenerator
     {
-        List<ExampleVariant> GenerateTasksVariant(string expression, List<BaseAnswer> answers, List<Constraints> constraints, int numberOfTasks, int correctAnswer);
+        List<ExampleVariant> GenerateTasksVariant(string expression, List<BaseAnswer> answers, List<Constraints> constraints, int numberOfTasks, int correctAnswer, int exampleId);
     }
 }
