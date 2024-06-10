@@ -1,32 +1,46 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TestsBuilder.Context;
-using TestsBuilder.Services;
+﻿using TestsBuilder.ViewModels;
+using TestsBuilder.Views;
 
 namespace TestsBuilder
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddPersistence(this IServiceCollection
-services)
+        public static IServiceCollection RegisterPages(this IServiceCollection services)
         {
-            services.AddSingleton<IDbService, AuthService>();
+            services
+                .AddTransient<LoginPage>()
+                .AddTransient<RegistrationPage>()
+                .AddTransient<StartPage>()
+                .AddTransient<TestsPage>()
+                .AddTransient<ExpressionsPage>()
+                .AddTransient<VariantsPage>()
+                .AddTransient<CalculatorPage>()
+                .AddTransient<VariantDetailPage>()
+                .AddTransient<MaterialsPage>()
+                .AddTransient<ProfilePage>()
+                .AddTransient<SolutionTestPage>()
+                .AddTransient<UserTestsPage>();
+
             return services;
         }
-
-        public static IServiceCollection AddPersistence(
-            this IServiceCollection services,
-            DbContextOptions options)
+        public static IServiceCollection RegisterViewModels(this IServiceCollection services)
         {
-            services.AddPersistence()
-            .AddSingleton<AppDbContext>(
-           new AppDbContext((DbContextOptions<AppDbContext>)options));
+            services
+                .AddTransient<TestsPageViewModel>()
+                .AddTransient<CalculatorPageViewModel>()
+                .AddTransient<ExpressionsPageViewModel>()
+                .AddTransient<BaseViewModel>()
+                .AddTransient<VariantsPageViewModel>()
+                .AddTransient<VariantDetailsPageViewModel>()
+                .AddTransient<LoginPageViewModel>()
+                .AddTransient<RegistrationPageViewModel>()
+                .AddTransient<ProfilePageViewModel>()
+                .AddTransient<StartPageViewModel>()
+                .AddTransient<MaterialsPageViewModel>()
+                .AddTransient<SolutionTestPageViewModel>()
+                .AddTransient<UserTestsPageViewModel>();
+
             return services;
         }
     }
-
 }

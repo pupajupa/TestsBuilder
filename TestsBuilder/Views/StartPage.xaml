@@ -2,6 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TestsBuilder.Views.StartPage"
+             xmlns:viewmodel="clr-namespace:TestsBuilder.ViewModels"
+             x:DataType="viewmodel:StartPageViewModel"
+             xmlns:model="clr-namespace:TestsBuilder.Models"
              BackgroundColor="#99B5EB">
     <VerticalStackLayout Margin="40,0,20,0">
         <HorizontalStackLayout>
@@ -48,7 +51,8 @@
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="20,20,20,20" />
                 </Border.StrokeShape>
-                <Button Text="Вход" FontAttributes="Bold" FontSize="22" TextColor="Black" BackgroundColor="#435DBC" WidthRequest="300" Clicked ="Login_Clicked"></Button>
+                <Button Text="Вход" FontAttributes="Bold" FontSize="22" TextColor="Black" BackgroundColor="#435DBC" WidthRequest="300"
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:StartPageViewModel}}, Path=GoToLoginPageCommand}"/>
             </Border>
             <Border Stroke="Black"
                     StrokeThickness="1"
@@ -60,7 +64,8 @@
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="20,20,20,20" />
                 </Border.StrokeShape>
-                <Button Text="Регистрация" FontAttributes="Bold" FontSize="22" TextColor="Black" BackgroundColor="#435DBC" WidthRequest="300" Clicked ="Registration_Clicked"></Button>
+                <Button Text="Регистрация" FontAttributes="Bold" FontSize="22" TextColor="Black" BackgroundColor="#435DBC" WidthRequest="300"
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:StartPageViewModel}}, Path=GoToRegistrationPageCommand}"/>
             </Border>
         </HorizontalStackLayout>
     </VerticalStackLayout>

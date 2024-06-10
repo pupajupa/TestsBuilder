@@ -2,15 +2,21 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TestsBuilder.Views.ProfilePage"
+             xmlns:viewmodel="clr-namespace:TestsBuilder.ViewModels"
+             x:DataType="viewmodel:ProfilePageViewModel"
+             xmlns:model="clr-namespace:TestsBuilder.Models"
              BackgroundColor="#D9E0ED"
              Shell.TitleColor="#99B5EB"
              Shell.BackgroundColor="#99B5EB">
 
     <Shell.TitleView>
         <StackLayout Orientation="Horizontal" Padding="0,0,40,0">
-            <Button Text="Личный кабинет" Clicked="Profile_Clicked" BackgroundColor="Transparent" TextColor="Black" FontSize="18" HorizontalOptions="EndAndExpand"/>
-            <Button Text="Тесты" Clicked="Tests_Clicked" BackgroundColor="Transparent" TextColor="Black" FontSize="18"/>
-            <Button Text="Материалы" Clicked="Materials_Clicked" BackgroundColor="Transparent" TextColor="Black" FontSize="18"/>
+            <Button Text="Личный кабинет"  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ProfilePageViewModel}}, Path=GoToProfilePageCommand}"
+                    BackgroundColor="Transparent" TextColor="Black" FontSize="18" HorizontalOptions="EndAndExpand"/>
+            <Button Text="Тесты"  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ProfilePageViewModel}},Path=GoToTestsPageCommand}"
+                    BackgroundColor="Transparent" TextColor="Black" FontSize="18"/>
+            <Button Text="Материалы"  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ProfilePageViewModel}}, Path=GoToMaterialsPageCommand}"
+                    BackgroundColor="Transparent" TextColor="Black" FontSize="18"/>
         </StackLayout>
     </Shell.TitleView>
     <VerticalStackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="15" Margin="0,40,0,0">
@@ -32,10 +38,10 @@
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="30" />
                     </Border.StrokeShape>
-                    <Image x:Name="ProfileImage" Grid.Column="0" Source="default_profile_image.png" Margin="0,0,0,0" Aspect="AspectFill" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
+                    <Image x:Name="Image" Grid.Column="0" Margin="0,0,0,0" Aspect="AspectFill" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
                 </Border>
                 <!-- Кнопка для загрузки новой фотографии -->
-                <Button Text="Изменить фото" FontAttributes="Bold" FontSize="19" TextColor="Black" HeightRequest="30" Margin="0,20,0,0" HorizontalOptions="Center" BackgroundColor="#214A5E" WidthRequest="200" Clicked="Change_Photo_ClickedAsync"/>
+                <Button Text="Изменить фото" FontAttributes="Bold" FontSize="19" TextColor="Black" HeightRequest="30" Margin="0,20,0,0" HorizontalOptions="Center" BackgroundColor="#214A5E" WidthRequest="200"/>
             </VerticalStackLayout>
             <!-- Информация о пользователе -->
             <VerticalStackLayout Grid.Column="2" Margin="-40,20,0,0">
@@ -53,7 +59,7 @@
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="10" />
                         </Border.StrokeShape>
-                        <Entry x:Name="FirstName"  Text="" HorizontalOptions="Center" HorizontalTextAlignment="Center" Margin="0,0,0,0" FontSize="22" TextColor="Black" VerticalTextAlignment="Center" VerticalOptions="Center"/>
+                        <Entry  HorizontalOptions="Center" HorizontalTextAlignment="Center" Margin="0,0,0,0" FontSize="22" TextColor="Black" VerticalTextAlignment="Center" VerticalOptions="Center"/>
                     </Border>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout HorizontalOptions="Start">
@@ -69,11 +75,11 @@
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="10" />
                         </Border.StrokeShape>
-                        <Entry x:Name="LastName" Text="" HorizontalOptions="Center" HorizontalTextAlignment="Center" Margin="0,0,0,0" FontSize="22" TextColor="Black" VerticalTextAlignment="Center" VerticalOptions="Center"/>
+                        <Entry  HorizontalOptions="Center" HorizontalTextAlignment="Center" Margin="0,0,0,0" FontSize="22" TextColor="Black" VerticalTextAlignment="Center" VerticalOptions="Center"/>
                     </Border>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout HorizontalOptions="Start">
-                    <Label Text="Ваше логин:" HorizontalOptions="Start" Margin="0,20,0,0"  FontSize="30"/>
+                    <Label Text="Ваш логин:" HorizontalOptions="Start" Margin="0,20,0,0"  FontSize="30"/>
                     <Border Stroke="Black"
                     VerticalOptions="Center"
                     Margin="5,20,0,0"
@@ -86,11 +92,11 @@
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="10" />
                         </Border.StrokeShape>
-                        <Entry x:Name="Login" Text="" HorizontalOptions="Center" HorizontalTextAlignment="Center" Margin="0,0,0,0" FontSize="22" TextColor="Black" VerticalTextAlignment="Center" VerticalOptions="Center"/>
+                        <Entry HorizontalOptions="Center" HorizontalTextAlignment="Center" Margin="0,0,0,0" FontSize="22" TextColor="Black" VerticalTextAlignment="Center" VerticalOptions="Center"/>
                     </Border>
                 </HorizontalStackLayout>
-                
-                <Button Text="Сохранить изменения" FontAttributes="Bold" FontSize="19" TextColor="Black" HeightRequest="30" Margin="0,70,0,0" HorizontalOptions="Center" BackgroundColor="#435DBC" WidthRequest="250" Clicked="Update_Info_Clicked"></Button>
+
+                <Button Text="Сохранить изменения" FontAttributes="Bold" FontSize="19" TextColor="Black" HeightRequest="30" Margin="0,70,0,0" HorizontalOptions="Center" BackgroundColor="#435DBC" WidthRequest="250" />
                 <!-- Другие поля профиля -->
             </VerticalStackLayout>
         </Grid>

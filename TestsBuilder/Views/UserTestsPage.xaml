@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TestsBuilder.Views.UserTestsPage"
+             xmlns:viewmodel="clr-namespace:TestsBuilder.ViewModels"
+             x:DataType="viewmodel:UserTestsPageViewModel"
+             xmlns:model="clr-namespace:TestsBuilder.Models"
+             Title="{Binding Title}"
+             Shell.TitleColor="#99B5EB"
+             Shell.BackgroundColor="#99B5EB"
+             BackgroundColor="#D9E0ED">
+    <Shell.TitleView>
+        <StackLayout Orientation="Horizontal" Padding="0,0,40,0">
+            <Button Text="Личный кабинет" Command="{Binding GoToProfilePageCommand}"
+                    BackgroundColor="Transparent" TextColor="Black" FontSize="18" HorizontalOptions="EndAndExpand"/>
+            <Button Text="Тесты" Command="{Binding GoToTestsPageCommand}"
+                    BackgroundColor="Transparent" TextColor="Black" FontSize="18"/>
+            <Button Text="Материалы" Command="{Binding GoToMaterialsPageCommand}"
+                    BackgroundColor="Transparent" TextColor="Black" FontSize="18"/>
+        </StackLayout>
+    </Shell.TitleView>
+    <StackLayout Margin="40,20" Orientation="Vertical">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.3*"/>
+                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition Width="0.3*"/>
+            </Grid.ColumnDefinitions>
+            <Label Text="Тесты" FontSize="32" TextColor="Black" HorizontalOptions="Start" Grid.Column="0" VerticalTextAlignment="Center"/>
+        </Grid>
+        <ListView ItemsSource="{Binding TestsWithResults}"  RowHeight="50" Margin="0,30,0,0">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="model:TestWithResult" >
+                    <ViewCell Height="30">
+                        <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer                                    
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:UserTestsPageViewModel}}, Path=GoToSolutionTestPageCommand}"
+                                    CommandParameter="{Binding .}"/>
+                            </StackLayout.GestureRecognizers>
+                            <Label Text="{Binding Test.Name}" TextColor="Black" FontSize="20" VerticalOptions="Center" Grid.Column="1"/>
+                            <Label Text="{Binding Result.IsCompleted, Converter={StaticResource BoolToTextConverter}}" 
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="FillAndExpand"
+                                    BackgroundColor="Black"
+                                    FontSize="20"
+                                    FontAttributes="Bold"
+                                    IsEnabled="{Binding Result.IsCompleted, Converter={StaticResource InverseBoolConverter}}"/>
+                            <BoxView Color="#7D90D7ED" HeightRequest="2" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

@@ -2,18 +2,24 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TestsBuilder.Views.ExpressionsPage"
+             xmlns:viewmodel="clr-namespace:TestsBuilder.ViewModels"
+             xmlns:model ="clr-namespace:TestsBuilder.Models"
+             x:DataType="viewmodel:ExpressionsPageViewModel"
              Shell.TitleColor="#99B5EB"
              Shell.BackgroundColor="#99B5EB"
              BackgroundColor="#D9E0ED">
     <Shell.TitleView>
         <StackLayout Orientation="Horizontal" Padding="0,0,40,0">
-            <Button Text="Личный кабинет" Clicked="Profile_Clicked" BackgroundColor="Transparent" TextColor="Black" FontSize="18" HorizontalOptions="EndAndExpand"/>
-            <Button Text="Тесты" Clicked="Tests_Clicked" BackgroundColor="Transparent" TextColor="Black" FontSize="18"/>
-            <Button Text="Материалы" Clicked="Materials_Clicked" BackgroundColor="Transparent" TextColor="Black" FontSize="18"/>
+            <Button Text="Личный кабинет"  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ExpressionsPageViewModel}}, Path=GoToProfilePageCommand}"
+                    BackgroundColor="Transparent" TextColor="Black" FontSize="18" HorizontalOptions="EndAndExpand"/>
+            <Button Text="Тесты"  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ExpressionsPageViewModel}},Path=GoToTestsPageCommand}"
+                    BackgroundColor="Transparent" TextColor="Black" FontSize="18"/>
+            <Button Text="Материалы"  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ExpressionsPageViewModel}}, Path=GoToMaterialsPageCommand}"
+                    BackgroundColor="Transparent" TextColor="Black" FontSize="18"/>
         </StackLayout>
     </Shell.TitleView>
     <StackLayout Margin="40,20" Orientation="Vertical">
-        <Label x:Name="titleLabel" FontSize="40" TextColor="Black" HorizontalOptions="Start" Grid.Column="0" VerticalTextAlignment="Center"/>
+        <Label Text="{Binding Test.Name}" FontSize="40" TextColor="Black" HorizontalOptions="Start" Grid.Column="0" VerticalTextAlignment="Center"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.3*"/>
@@ -22,14 +28,18 @@
             </Grid.ColumnDefinitions>
             <Label Text="Ваши задания" FontSize="32" TextColor="Black" HorizontalOptions="Start" Grid.Column="0" VerticalTextAlignment="Center"/>
             <Button Text="Добавить задание" HorizontalOptions="EndAndExpand" Grid.Column="2" BackgroundColor="#7D90D7" TextColor="Black"
-                    VerticalOptions="Center" FontSize="18" CornerRadius="20" WidthRequest="190" HeightRequest="28" Clicked="CreateExpressions_Clicked"/>
+                    VerticalOptions="Center" FontSize="18" CornerRadius="20" WidthRequest="190" HeightRequest="28" Command="{Binding EnterCommand}"/>
         </Grid>
-        <ListView x:Name="ExpressionsListView" ItemsSource="{Binding Expressions}" RowHeight="50" Margin="0,30,0,0" ItemTapped="ExpressionsItemTapped">
+        <ListView ItemsSource="{Binding Examples}" Margin="0,30,0,0">
             <ListView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="model:Example">
                     <ViewCell Height="30">
                         <StackLayout>
-                            <Label Text="{Binding Title}" TextColor="Black" FontSize="20"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer CommandParameter="{Binding .}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ExpressionsPageViewModel}}, Path=GoToVariantsPageCommand}" />
+                            </StackLayout.GestureRecognizers>
+                            <Label Text="{Binding Name}" TextColor="Black" FontSize="20"/>
                             <BoxView Color="#7D90D7ED" HeightRequest="2" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
                             <!-- Другие элементы управления для отображения других свойств теста -->
                         </StackLayout>

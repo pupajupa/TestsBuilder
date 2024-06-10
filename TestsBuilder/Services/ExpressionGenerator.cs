@@ -3,59 +3,87 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestsBuilder.Interfaces;
 using TestsBuilder.Models;
 
 namespace TestsBuilder.Services
 {
-    public class ExpressionGenerator
+    public class ExpressionGenerator:IExpressionGenerator
     {
-        private readonly Random _random;
-
-        public ExpressionGenerator()
+        public List<ExampleVariant> GenerateTasksVariant(string expression, List<BaseAnswer> answers, List<Constraints> constraints, int numberOfTasks, int correctAnswer)
         {
-            _random = new Random();
-        }
+            Random random = new Random();
+            List<ExampleVariant> generatedTasks = new List<ExampleVariant>();
 
-        // Метод для генерации 10 вариантов задания
-        public List<Variant> GenerateExpressions(string expression,int amin, int amax, int bmin, int bmax)
-        {
-            bool containsA = expression.Contains('a');
-            bool containsB = expression.Contains('b');
-            string newExpression = expression;
-            List<Variant> result = new List<Variant>();
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < numberOfTasks; i++)
             {
-                // Генерируем случайные значения
-                // для a и b
-                if (containsA && containsB)
+                ExampleVariant task = new ExampleVariant();
+                Dictionary<char, int> generatedValues = new Dictionary<char, int>();
+
+                foreach (var constraint in constraints)
                 {
-                    int a = _random.Next(amin, amax); // Примерный диапазон для a
-                    int b = _random.Next(bmin, bmax); // Примерный диапазон для b
-                    newExpression = expression.Replace("a", a.ToString());
-                    newExpression = newExpression.Replace("b", b.ToString());
+                    int value;
+                    if (constraint.Equals != -10000)
+                    {
+                        value = constraint.Equals;
+                    }
+                    else if (constraint.NoEquals != -10000 && constraint.MaxValue != -10000 && constraint.MinValue != -10000)
+                    {
+                        int value1 = random.Next(constraint.MinValue, constraint.NoEquals);
+                        int value2 = random.Next(constraint.NoEquals, constraint.MaxValue);
+                        value = random.Next(value1, value2);
+                    }
+                    else if (constraint.NoEquals != -10000 && constraint.MaxValue != -10000)
+                    {
+                        int value1 = random.Next(constraint.NoEquals - 30, constraint.NoEquals);
+                        int value2 = random.Next(constraint.NoEquals, constraint.MaxValue);
+                        value = random.Next(value1, value2);
+                    }
+                    else if (constraint.NoEquals != -10000 && constraint.MinValue != -10000)
+                    {
+                        int value1 = random.Next(constraint.MinValue, constraint.NoEquals);
+                        int value2 = random.Next(constraint.NoEquals, constraint.NoEquals + 30);
+                        value = random.Next(value1, value2);
+                    }
+                    else if (constraint.MinValue != -10000 && constraint.MaxValue != -10000)
+                    {
+                        value = random.Next(constraint.MinValue, constraint.MaxValue);
+                    }
+                    else if (constraint.MinValue != -10000)
+                    {
+                        value = random.Next(constraint.MinValue, constraint.MinValue + 50);
+                    }
+                    else
+                    {
+                        value = random.Next(constraint.MaxValue - 50, constraint.MaxValue);
+                    }
+                    generatedValues[constraint.Letter] = value;
+                }
+                string modifiedExpression = expression;
+                foreach (var kvp in generatedValues)
+                {
+                    modifiedExpression = modifiedExpression.Replace(kvp.Key.ToString(), kvp.Value.ToString());
+                }
+                task.Expression = modifiedExpression;
+
+                List<Answer> modifiedAnswers = new List<Answer>();
+                foreach (var answer in answers)
+                {
+                    string modifiedAnswer = answer.Text;
+                    foreach (var kvp in generatedValues)
+                    {
+                        modifiedAnswer = modifiedAnswer.Replace(kvp.Key.ToString(), kvp.Value.ToString());
+                    }
+                    modifiedAnswers.Add(new Answer { Text = modifiedAnswer, ExampleVariantId = task.Id});
                 }
 
-                else if (containsB)
-                {
-                    int b = _random.Next(bmin, bmax); // Примерный диапазон для b
-                    newExpression = newExpression.Replace("b", b.ToString());
-                }
-                // Формируем выражение с новыми значениями a и b
-                else if (containsA)
-                {
-                    int a = _random.Next(amin, amax); // Примерный диапазон для a
-                    newExpression = expression.Replace("a", a.ToString());
-                }
-
-                result.Add(new Variant
-                {
-                    VariantExpression = newExpression,
-                    VariantNumber = i + 1,
-                    VariantAnswer = ""
-                }) ;
+                task.Answers = modifiedAnswers;
+                task.CorrectAnswer = task.Answers[correctAnswer - 1].Text;
+                task.Number = (i + 1).ToString();
+                generatedTasks.Add(task);
             }
 
-            return result;
+            return generatedTasks;
         }
     }
 }

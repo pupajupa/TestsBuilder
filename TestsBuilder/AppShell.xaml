@@ -26,14 +26,10 @@
     <ShellContent
         ContentTemplate="{DataTemplate view:ProfilePage}"
         Route="ProfilePage" />
-    
+
     <ShellContent
         ContentTemplate="{DataTemplate view:VariantsPage}"
         Route="VariantsPage"/>
-
-    <ShellContent
-        ContentTemplate="{DataTemplate view:CreateExpressionsPage}"
-        Route="CreateExpressionsPage"/>
 
     <ShellContent
         ContentTemplate="{DataTemplate view:ExpressionsPage}"
@@ -42,4 +38,15 @@
     <ShellContent
         ContentTemplate="{DataTemplate view:VariantDetailPage}"
         Route="VariantDetailPage"/>
+
+    <ShellContent
+        ContentTemplate="{DataTemplate view:CalculatorPage}"
+        Route="CalculatorPage"/>
+    
+    <ShellContent
+        ContentTemplate="{DataTemplate view:MaterialsPage}"
+        Route="MaterialsPage"/>
+    <ShellContent
+        ContentTemplate="{DataTemplate view:UserTestsPage}"
+        Route="UserTestsPage"/>
 </Shell>

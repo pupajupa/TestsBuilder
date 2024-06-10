@@ -2,14 +2,21 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TestsBuilder.Views.TestsPage"
+             xmlns:viewmodel="clr-namespace:TestsBuilder.ViewModels"
+             x:DataType="viewmodel:TestsPageViewModel"
+             xmlns:model="clr-namespace:TestsBuilder.Models"
+             Title="{Binding Title}"
              Shell.TitleColor="#99B5EB"
              Shell.BackgroundColor="#99B5EB"
              BackgroundColor="#D9E0ED">
     <Shell.TitleView>
         <StackLayout Orientation="Horizontal" Padding="0,0,40,0">
-            <Button Text="Личный кабинет" Clicked="Profile_Clicked" BackgroundColor="Transparent" TextColor="Black" FontSize="18" HorizontalOptions="EndAndExpand"/>
-            <Button Text="Тесты" Clicked="Tests_Clicked" BackgroundColor="Transparent" TextColor="Black" FontSize="18"/>
-            <Button Text="Материалы" Clicked="Materials_Clicked" BackgroundColor="Transparent" TextColor="Black" FontSize="18"/>
+            <Button Text="Личный кабинет"  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TestsPageViewModel}}, Path=GoToProfilePageCommand}"
+                    BackgroundColor="Transparent" TextColor="Black" FontSize="18" HorizontalOptions="EndAndExpand"/>
+            <Button Text="Тесты"  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TestsPageViewModel}},Path=GoToTestsPageCommand}"
+                    BackgroundColor="Transparent" TextColor="Black" FontSize="18"/>
+            <Button Text="Материалы"  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TestsPageViewModel}}, Path=GoToMaterialsPageCommand}"
+                    BackgroundColor="Transparent" TextColor="Black" FontSize="18"/>
         </StackLayout>
     </Shell.TitleView>
     <StackLayout Margin="40,20" Orientation="Vertical">
@@ -21,13 +28,18 @@
             </Grid.ColumnDefinitions>
             <Label Text="Ваши тесты" FontSize="32" TextColor="Black" HorizontalOptions="Start" Grid.Column="0" VerticalTextAlignment="Center"/>
             <Button Text="Создать тест" HorizontalOptions="EndAndExpand" Grid.Column="2" BackgroundColor="#7D90D7" 
-                    TextColor="Black" VerticalOptions="Center" FontSize="18" CornerRadius="20" WidthRequest="180" HeightRequest="28" Clicked="Expressions_Clicked"/>
-        </Grid>    
-        <ListView ItemsSource="{Binding Tests}" RowHeight="50" Margin="0,30,0,0" ItemTapped="TestsItemTapped">
+                    TextColor="Black" VerticalOptions="Center" FontSize="18" CornerRadius="20" WidthRequest="180" HeightRequest="28"
+                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TestsPageViewModel}}, Path=EnterCommand}"/>
+        </Grid>
+        <ListView ItemsSource="{Binding Tests}" RowHeight="50" Margin="0,30,0,0">
             <ListView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType ="model:Test">
                     <ViewCell Height="30">
                         <StackLayout>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                      Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TestsPageViewModel}}, Path=GoToExpressionsPageCommand}"/>
+                            </StackLayout.GestureRecognizers>
                             <Label Text="{Binding Name}" TextColor="Black" FontSize="20"/>
                             <BoxView Color="#7D90D7ED" HeightRequest="2" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
                             <!-- Другие элементы управления для отображения других свойств теста -->

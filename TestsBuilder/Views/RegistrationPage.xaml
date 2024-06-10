@@ -2,6 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TestsBuilder.Views.RegistrationPage"
+             xmlns:viewmodel="clr-namespace:TestsBuilder.ViewModels"
+             x:DataType="viewmodel:RegistrationPageViewModel"
+             xmlns:model="clr-namespace:TestsBuilder.Models"
              BackgroundColor="#D9E0ED">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -22,7 +25,7 @@
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="20,20,20,20" />
                     </Border.StrokeShape>
-                    <Entry x:Name="FirstNameEntry" BackgroundColor="#7D90D7" WidthRequest="250" HeightRequest="10" FontSize="17" VerticalTextAlignment="Start" VerticalOptions="Center" Placeholder="Имя..."/>
+                    <Entry Text="{Binding FirstName}" BackgroundColor="#7D90D7" WidthRequest="250" HeightRequest="10" FontSize="17" VerticalTextAlignment="Start" VerticalOptions="Center" Placeholder="Имя..."/>
                 </Border>
             </HorizontalStackLayout>
             <HorizontalStackLayout Grid.Column="1" Margin="0,20,0,0">
@@ -36,7 +39,7 @@
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="20,20,20,20" />
                     </Border.StrokeShape>
-                    <Entry x:Name="LastNameEntry" BackgroundColor="#7D90D7" WidthRequest="250" HeightRequest="10" FontSize="17" VerticalTextAlignment="Center" VerticalOptions="Center" Placeholder="Фамилия..."/>
+                    <Entry Text="{Binding LastName}" BackgroundColor="#7D90D7" WidthRequest="250" HeightRequest="10" FontSize="17" VerticalTextAlignment="Center" VerticalOptions="Center" Placeholder="Фамилия..."/>
                 </Border>
             </HorizontalStackLayout>
             <HorizontalStackLayout Grid.Column="1" Margin="0,20,0,0">
@@ -50,7 +53,7 @@
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="20,20,20,20" />
                     </Border.StrokeShape>
-                    <Entry x:Name="LoginEntry" BackgroundColor="#7D90D7" WidthRequest="250" HeightRequest="10" FontSize="17" VerticalTextAlignment="Center" VerticalOptions="Center" Placeholder="Логин..."/>
+                    <Entry Text="{Binding Login}" BackgroundColor="#7D90D7" WidthRequest="250" HeightRequest="10" FontSize="17" VerticalTextAlignment="Center" VerticalOptions="Center" Placeholder="Логин..."/>
                 </Border>
             </HorizontalStackLayout>
             <HorizontalStackLayout Grid.Column="1" Margin="0,20,0,0">
@@ -64,7 +67,7 @@
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="20,20,20,20" />
                     </Border.StrokeShape>
-                    <Entry x:Name="PasswordEntry" BackgroundColor="#7D90D7" WidthRequest="250" HeightRequest="10" FontSize="17" VerticalTextAlignment="Center" VerticalOptions="Center" IsPassword="True" Placeholder="Пароль..."/>
+                    <Entry Text="{Binding Password}" BackgroundColor="#7D90D7" WidthRequest="250" HeightRequest="10" FontSize="17" VerticalTextAlignment="Center" VerticalOptions="Center" IsPassword="True" Placeholder="Пароль..."/>
                 </Border>
             </HorizontalStackLayout>
             <HorizontalStackLayout Grid.Column="1" Margin="0,20,0,0">
@@ -78,7 +81,7 @@
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="20,20,20,20" />
                     </Border.StrokeShape>
-                    <Entry x:Name="ReenterPasswordEntry" BackgroundColor="#7D90D7" WidthRequest="250" HeightRequest="10" FontSize="17" VerticalTextAlignment="Center" VerticalOptions="Center" IsPassword="True" Placeholder="Повтор пароля..."/>
+                    <Entry Text="{Binding SecondPassword}" BackgroundColor="#7D90D7" WidthRequest="250" HeightRequest="10" FontSize="17" VerticalTextAlignment="Center" VerticalOptions="Center" IsPassword="True" Placeholder="Повтор пароля..."/>
                 </Border>
             </HorizontalStackLayout>
             <Border Stroke="Black"
@@ -91,7 +94,8 @@
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="20,20,20,20" />
                 </Border.StrokeShape>
-                <Button Text="Регистрация" FontAttributes="Bold" FontSize="22" TextColor="Black" BackgroundColor="#435DBC" WidthRequest="250" Clicked="Registration_Clicked"></Button>
+                <Button Text="Регистрация" FontAttributes="Bold" FontSize="22" TextColor="Black" BackgroundColor="#435DBC" WidthRequest="250" 
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:RegistrationPageViewModel}}, Path=RegisterCommand}"/>
             </Border>
         </VerticalStackLayout>
     </Grid>

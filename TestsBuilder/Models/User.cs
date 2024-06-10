@@ -1,28 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SQLite;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace TestsBuilder.Models
 {
-    [Table("Users")]
     public class User
     {
-        [PrimaryKey, AutoIncrement, Indexed]
-        [Column("Id")]
-        public int UserId { get; set; }
-
-        public string Username { get; set; }
-
+        [Key]
+        public int Id { get; set; } // Primary key
+        
+        [Required]
+        public string FirstName { get; set; }
+        
+        [Required]
+        public string Login { get; set; }
+        
+        [Required]
         public string Password { get; set; }
 
-        public string Name {  get; set; }
-
-        public string LastName {  get; set; }
-
+        [Required]
+        public string LastName { get; set; }
         public byte[] Image { get; set; }
-        
     }
+
 }

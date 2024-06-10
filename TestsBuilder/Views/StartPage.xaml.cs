@@ -1,25 +1,16 @@
-using TestsBuilder.Services;
+using TestsBuilder.ViewModels;
 
 namespace TestsBuilder.Views;
 
 public partial class StartPage : ContentPage
 {
-	private readonly IDbService _dbService;
-
-	public StartPage(IDbService dbService)
+	public StartPage()
 	{
 		InitializeComponent();
-		_dbService = dbService;
-		_dbService.Init();
-	}
-
-    private async void Login_Clicked(object sender, EventArgs e)
-    {
-		await Navigation.PushAsync(new LoginPage(_dbService));
+        BindingContext = new StartPageViewModel();
     }
-
-    private async void Registration_Clicked(object sender, EventArgs e)
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
-		await Navigation.PushAsync(new RegistrationPage(_dbService));
+        base.OnNavigatedTo(args);
     }
 }

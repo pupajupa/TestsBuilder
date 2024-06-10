@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using TestsBuilder.Context;
+using TestsBuilder.ApplicationDbContext;
 using TestsBuilder.Services;
+using TestsBuilder.ViewModels;
 using TestsBuilder.Views;
 
 namespace TestsBuilder
@@ -13,6 +13,7 @@ namespace TestsBuilder
             InitializeComponent();
 
             MainPage = new AppShell();
+            //MainPage = new AppShell();
         }
     }
 }
