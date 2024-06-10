@@ -70,7 +70,7 @@ namespace TestsBuilder.ViewModels
                 NewAnswer += "\n";
             }
             NewAnswer += InputText;
-            string answer = NewAnswer;
+            string answer = InputText;
             BaseAnswers.Add(new BaseAnswer { Text = answer, ExampleId = Example.Id });
             InputText = string.Empty;
         }

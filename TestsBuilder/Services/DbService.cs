@@ -286,12 +286,14 @@ namespace TestsBuilder.Services
         {
             Init();
             CurrentExample = Database.Table<Example>().FirstOrDefault(u => u.Id == exId);
+            CurrentExample.BaseAnswers = Database.Table<BaseAnswer>().Where(b=>b.ExampleId == exId).ToList();
         }
 
         public void SetCurrentExampleVariant(int exvarId)
         {
             Init();
             CurrentExampleVariant = Database.Table<ExampleVariant>().FirstOrDefault(u => u.Id == exvarId);
+            CurrentExampleVariant.Answers = Database.Table<Answer>().Where(a => a.ExampleVariantId == exvarId).ToList();
         }
 
         public void ClearCurrentTest()
@@ -338,8 +340,8 @@ namespace TestsBuilder.Services
         }
         public void AddAnswerToVariant(int exampleVariantId, string answerText)
         {
-            var variant = Database.Find<ExampleVariant>(exampleVariantId);
-            if (variant != null)
+            var answers = Database.Find<Answer>(a=>a.ExampleVariantId == exampleVariantId);
+            if (answers != null)
             {
                 var answer = new Answer
                 {
@@ -347,15 +349,13 @@ namespace TestsBuilder.Services
                     ExampleVariantId = exampleVariantId
                 };
                 Database.Insert(answer);
-                variant.Answers.Add(answer);
-                Database.UpdateWithChildren(variant);
             }
         }
 
         public void AddBaseAnswerToExample(int exampleId, string answerText)
         {
-            var example = Database.Find<Example>(exampleId);
-            if (example != null)
+            var baseAnswers = Database.Find<BaseAnswer>(b=>b.ExampleId == exampleId);
+            if (baseAnswers != null)
             {
                 var baseAnswer = new BaseAnswer
                 {
@@ -363,9 +363,6 @@ namespace TestsBuilder.Services
                     ExampleId = exampleId
                 };
                 Database.Insert(baseAnswer);
-
-                example.BaseAnswers.Add(baseAnswer);
-                Database.UpdateWithChildren(example);
             }
         }
     }
