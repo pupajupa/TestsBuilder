@@ -340,8 +340,8 @@ namespace TestsBuilder.Services
         }
         public void AddAnswerToVariant(int exampleVariantId, string answerText)
         {
-            var answers = Database.Find<Answer>(a=>a.ExampleVariantId == exampleVariantId);
-            if (answers != null)
+            var variant = Database.Find<ExampleVariant>(exampleVariantId);
+            if (variant != null)
             {
                 var answer = new Answer
                 {
@@ -349,13 +349,14 @@ namespace TestsBuilder.Services
                     ExampleVariantId = exampleVariantId
                 };
                 Database.Insert(answer);
+                variant.Answers.Add(answer);
             }
         }
 
         public void AddBaseAnswerToExample(int exampleId, string answerText)
         {
-            var baseAnswers = Database.Find<BaseAnswer>(b=>b.ExampleId == exampleId);
-            if (baseAnswers != null)
+            var example = Database.Find<Example>(exampleId);
+            if (example != null)
             {
                 var baseAnswer = new BaseAnswer
                 {
@@ -363,6 +364,8 @@ namespace TestsBuilder.Services
                     ExampleId = exampleId
                 };
                 Database.Insert(baseAnswer);
+
+                example.BaseAnswers.Add(baseAnswer);
             }
         }
     }
