@@ -79,7 +79,7 @@ namespace TestsBuilder.ViewModels
                     try
                     {
                         // Создание MemoryStream из массива байтов
-                        using MemoryStream ms = new MemoryStream(user2.Image);
+                        MemoryStream ms = new MemoryStream(user2.Image);
                         // Убедитесь, что MemoryStream содержит данные
                         if (ms.Length > 0)
                         {
