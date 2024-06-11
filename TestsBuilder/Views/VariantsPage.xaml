@@ -23,7 +23,7 @@
         <ListView ItemsSource="{Binding Variants}" RowHeight="50" Margin="0,30,0,0">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType ="model:ExampleVariant">
-                    <ViewCell>
+                    <ViewCell Height="30">
                         <StackLayout Orientation="Horizontal">
                             <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:VariantsPageViewModel}}, Path=GoToVariantDetailPageCommand}" 

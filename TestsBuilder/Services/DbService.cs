@@ -1,5 +1,6 @@
 ﻿using SQLite;
 using SQLiteNetExtensions.Extensions;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using TestsBuilder.Interfaces;
 using TestsBuilder.Models;
@@ -8,11 +9,13 @@ namespace TestsBuilder.Services
 {
     public class DbService : IDbService
     {
-        private const string _dbName = "TestsBuilderDb6.db3";
+        private const string _dbName = "TestsBuilderDb7.db3";
         public const SQLiteOpenFlags Flags =
             SQLite.SQLiteOpenFlags.ReadWrite |
             SQLiteOpenFlags.Create |
             SQLiteOpenFlags.SharedCache;
+        private const string Name = "TestsBuilder.Resources.Images.default_profile_image.png";
+
         private static string _dbPath => Path.Combine(FileSystem.AppDataDirectory, _dbName);
         SQLiteConnection Database;
         public Student CurrentStudent { get; private set; }
@@ -325,27 +328,32 @@ namespace TestsBuilder.Services
             {
                 // Извлекаем изображение из ресурсов
                 var assembly = typeof(DbService).Assembly;
-                using Stream imageStream = assembly.GetManifestResourceStream("TestsBuilder.Resources.Images.default_profile_image.png");
-
-                // Преобразуем изображение в массив байтов
-                byte[] imageBytes = null;
-                if (imageStream != null)
+                try
                 {
-                    using MemoryStream memoryStream = new();
-                    imageStream.CopyTo(memoryStream);
-                    imageBytes = memoryStream.ToArray();
+                    using Stream imageStream = assembly.GetManifestResourceStream(Name);
+                    byte[] imageBytes = null;
+                    if (imageStream != null)
+                    {
+                        using MemoryStream memoryStream = new();
+                        imageStream.CopyTo(memoryStream);
+                        imageBytes = memoryStream.ToArray();
+                    }
+                    // Создайте учителя и добавьте его в базу данных
+                    var initialTeacher = new Teacher
+                    {
+                        FirstName = "admin",
+                        LastName = "admin",
+                        Login = "admin",
+                        Password = "admin", // Желательно хранить пароли в зашифрованном виде
+                        Image = imageBytes // Если есть изображение профиля, установите здесь
+                    };
+                    Database.Insert(initialTeacher);
                 }
-                // Создайте учителя и добавьте его в базу данных
-                var initialTeacher = new Teacher
+                catch(Exception ex)
                 {
-                    FirstName = "admin",
-                    LastName = "admin",
-                    Login = "admin",
-                    Password = "admin", // Желательно хранить пароли в зашифрованном виде
-                    Image = imageBytes // Если есть изображение профиля, установите здесь
-                };
-
-                Database.Insert(initialTeacher);
+                    Debug.WriteLine(ex.Message);
+                }
+                // Преобразуем изображение в массив байтов
             }
         }
         public void AddAnswerToVariant(int exampleVariantId, string answerText)

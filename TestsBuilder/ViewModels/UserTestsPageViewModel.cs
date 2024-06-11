@@ -64,13 +64,11 @@ namespace TestsBuilder.ViewModels
         [RelayCommand] 
         async Task GoToTestsPage()
         {
-            await Shell.Current.Navigation.PopToRootAsync();
-            await Shell.Current.GoToAsync(nameof(UserTestsPage));
+            await Shell.Current.GoToAsync($"{nameof(UserTestsPage)}");
         }
         public async Task Materials()
         {
-            await Shell.Current.Navigation.PopToRootAsync();
-            await Shell.Current.GoToAsync(nameof(MaterialsPage));
+            await Shell.Current.GoToAsync($"{nameof(MaterialsPage)}");
         }
 
         [RelayCommand]
@@ -78,8 +76,7 @@ namespace TestsBuilder.ViewModels
         public async Task Profile()
         {
 
-            await Shell.Current.Navigation.PopToRootAsync();
-            await Shell.Current.GoToAsync(nameof(ProfilePage));
+            await Shell.Current.GoToAsync($"{nameof(ProfilePage)}");
         }
 
         [RelayCommand]
