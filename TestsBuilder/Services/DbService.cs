@@ -17,7 +17,7 @@ namespace TestsBuilder.Services
         SQLiteConnection Database;
         public Student CurrentStudent { get; private set; }
         public Teacher CurrentTeacher { get; private set; }
-        public Test CurrentTest { get ; private set; }
+        public Test CurrentTest { get; private set; }
         public Example CurrentExample { get; private set; }
         public ExampleVariant CurrentExampleVariant { get; private set; }
         public DbService()
@@ -231,11 +231,11 @@ namespace TestsBuilder.Services
                 Database.Delete(exampleVariant);
             }
         }
-        
+
         public IEnumerable<Example> GetAllExpressionsByTestId(int testId)
         {
             Init();
-            return Database.Table<Example>().Where(e=>e.TestId== testId).ToList();
+            return Database.Table<Example>().Where(e => e.TestId == testId).ToList();
         }
         public IEnumerable<ExampleVariant> GetAllExpressionVariantsByExampleId(int exampleId)
         {
@@ -275,6 +275,16 @@ namespace TestsBuilder.Services
         public Example GetCurrentExample()
         {
             return CurrentExample;
+        }
+
+        public Student GetCurrentStudent()
+        {
+            return CurrentStudent;
+        }
+
+        public Teacher GetCurrentTeacher()
+        {
+            return CurrentTeacher;
         }
 
         public ExampleVariant GetCurrentExampleVariant()

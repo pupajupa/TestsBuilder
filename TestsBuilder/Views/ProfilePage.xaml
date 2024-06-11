@@ -38,10 +38,11 @@
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="30" />
                     </Border.StrokeShape>
-                    <Image Grid.Column="0" Margin="0,0,0,0" Aspect="AspectFill" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
+                    <Image Source="{Binding ProfileImage}" Grid.Column="0" Margin="0,0,0,0" Aspect="AspectFill" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
                 </Border>
                 <!-- Кнопка для загрузки новой фотографии -->
-                <Button Text="Изменить фото" FontAttributes="Bold" FontSize="19" TextColor="Black" HeightRequest="30" Margin="0,20,0,0" HorizontalOptions="Center" BackgroundColor="#214A5E" WidthRequest="200"/>
+                <Button Text="Изменить фото" FontAttributes="Bold" FontSize="19" TextColor="Black" HeightRequest="30" Margin="0,20,0,0" HorizontalOptions="Center" BackgroundColor="#214A5E" WidthRequest="200"
+                        />
             </VerticalStackLayout>
             <!-- Информация о пользователе -->
             <VerticalStackLayout Grid.Column="2" Margin="-40,20,0,0" >
@@ -64,7 +65,7 @@
                             <Border.StrokeShape>
                                 <RoundRectangle CornerRadius="10" />
                             </Border.StrokeShape>
-                            <Entry  HorizontalOptions="EndAndExpand" HorizontalTextAlignment="Center" Margin="0,0,0,0" FontSize="22" TextColor="Black" VerticalTextAlignment="Center" IsReadOnly="False"/>
+                            <Entry Text="{Binding FirstName}"  HorizontalOptions="EndAndExpand" HorizontalTextAlignment="Center" Margin="0,0,0,0" FontSize="22" TextColor="Black" VerticalTextAlignment="Center" IsReadOnly="False"/>
                         </Border>
                         <Border Stroke="Black"
                                 Margin="5,20,0,0"
@@ -77,7 +78,7 @@
                             <Border.StrokeShape>
                                 <RoundRectangle CornerRadius="10" />
                             </Border.StrokeShape>
-                            <Entry  HorizontalOptions="Center" HorizontalTextAlignment="Center" Margin="0,0,0,0" FontSize="22" TextColor="Black" VerticalTextAlignment="Center" VerticalOptions="Center"/>
+                            <Entry Text="{Binding LastName}" HorizontalOptions="Center" HorizontalTextAlignment="Center" Margin="0,0,0,0" FontSize="22" TextColor="Black" VerticalTextAlignment="Center" VerticalOptions="Center"/>
                         </Border>
 
                         <Border Stroke="Black"
@@ -92,11 +93,12 @@
                             <Border.StrokeShape>
                                 <RoundRectangle CornerRadius="10" />
                             </Border.StrokeShape>
-                            <Entry HorizontalOptions="Center" HorizontalTextAlignment="Center" Margin="0,0,0,0" FontSize="22" TextColor="Black" VerticalTextAlignment="Center" VerticalOptions="Center"/>
+                            <Entry Text="{Binding Login}" HorizontalOptions="Center" HorizontalTextAlignment="Center" Margin="0,0,0,0" FontSize="22" TextColor="Black" VerticalTextAlignment="Center" VerticalOptions="Center"/>
                         </Border>
                     </VerticalStackLayout>
                 </HorizontalStackLayout>
-                <Button Text="Сохранить изменения" FontAttributes="Bold" FontSize="19" TextColor="Black" HeightRequest="30" Margin="0,70,0,0" HorizontalOptions="Center" BackgroundColor="#435DBC" WidthRequest="250" />
+                <Button Text="Сохранить изменения" FontAttributes="Bold" FontSize="19" TextColor="Black" HeightRequest="30" Margin="0,70,0,0" HorizontalOptions="Center" BackgroundColor="#435DBC" WidthRequest="250" 
+                        />
                 <!-- Другие поля профиля -->
             </VerticalStackLayout>
         </Grid>

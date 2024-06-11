@@ -2,12 +2,14 @@
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TestsBuilder.Interfaces;
 using TestsBuilder.Models;
 using TestsBuilder.Views;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TestsBuilder.ViewModels
 {
@@ -27,13 +29,14 @@ namespace TestsBuilder.ViewModels
         string login;
 
         [ObservableProperty]
-        Image image;
+        Image profileImage;
         public ProfilePageViewModel(IDbService dbService) 
         {
             Title = "Profile";
             _dbService = dbService;
+            var user1 = _dbService.GetCurrentStudent();
+            var user2 = _dbService.GetCurrentTeacher();
         }
-
         [RelayCommand]
         async Task GoToMaterialsPage() => await Materials();
 

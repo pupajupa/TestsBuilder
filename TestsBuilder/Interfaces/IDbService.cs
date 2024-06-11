@@ -10,6 +10,10 @@ namespace TestsBuilder.Interfaces
     public interface  IDbService
     {
         void Init();
+
+        public Student GetCurrentStudent();
+
+        public Teacher GetCurrentTeacher();
         IEnumerable<Student> GetAllStudents();
         Student GetStudentById(int id);
         void AddStudent(Student student);
