@@ -42,9 +42,7 @@ namespace TestsBuilder.ViewModels
         }
 
         [RelayCommand]
-        async Task GoToTestsPage() => await GoTests();
-
-        async Task GoTests()
+        public async Task GoToTestsPage()
         {
             _dbService.ClearCurrentTest();
             await Shell.Current.GoToAsync(nameof(TestsPage));

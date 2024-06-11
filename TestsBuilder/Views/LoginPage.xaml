@@ -6,14 +6,14 @@
              x:DataType="viewmodel:LoginPageViewModel"
              xmlns:model="clr-namespace:TestsBuilder.Models"
              BackgroundColor="#D9E0ED">
-    <Grid>
+    <Grid HorizontalOptions="Center" VerticalOptions="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.3*"/>
             <ColumnDefinition Width="0.4*"/>
             <ColumnDefinition Width="0.3*"/>
         </Grid.ColumnDefinitions>
         <VerticalStackLayout Grid.Column="1">
-            <Label Text="Добро пожаловать!" TextColor="Black" FontSize="32" Grid.Column="1" HorizontalTextAlignment="Center" Margin="0,120,0,50"/>
+            <Label Text="Добро пожаловать!" TextColor="Black" FontSize="32" Grid.Column="1" HorizontalTextAlignment="Center" Margin="0,0,0,50"/>
             <HorizontalStackLayout Grid.Column="1">
                 <Label Text="Введите login" FontSize="20" VerticalOptions="Center" TextColor="Black" Margin="0,0,35,0"/>
                 <Border Stroke="Black"
@@ -58,8 +58,7 @@
                 </Button>
             </Border>
             <StackLayout Orientation="Horizontal" Margin="0,10,0,0" Padding="0">
-                <CheckBox IsChecked="False" x:Name="CheckBox"/>
-                <Label Text="Регистрация" TextColor="DarkGray" FontAttributes="Bold" FontSize="Small"  HorizontalOptions="EndAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" >
+                <Label Text="Регистрация" TextColor="DarkGray" FontAttributes="Bold" FontSize="Small"  HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" >
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer CommandParameter="{Binding .}"
                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:LoginPageViewModel}}, Path=GoToRegisterPageCommand}"/>

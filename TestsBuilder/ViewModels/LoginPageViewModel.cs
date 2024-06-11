@@ -75,17 +75,17 @@ namespace TestsBuilder.ViewModels
         }
         private async Task GoToUserTestsPage()
         {
-            await Shell.Current.GoToAsync($"//{nameof(UserTestsPage)}");
+            await Shell.Current.GoToAsync($"{nameof(UserTestsPage)}");
         }
         private async Task GoToTestsPage()
         {
-            await Shell.Current.GoToAsync($"//{nameof(TestsPage)}");
+            await Shell.Current.GoToAsync($"{nameof(TestsPage)}");
         }
 
         [RelayCommand]
         private async Task GoToRegisterPage()
         {
-            await Shell.Current.GoToAsync(nameof(RegistrationPage));
+            await Shell.Current.GoToAsync($"{nameof(RegistrationPage)}");
         }
     }
 }

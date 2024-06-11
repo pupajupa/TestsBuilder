@@ -404,15 +404,16 @@ namespace TestsBuilder.ViewModels
                 {"SIN", "sin"},
                 {"COS", "cos"},
                 {"TAN", "tg"},
-                {"ASIN", "asin"},
-                {"ACOS", "acos"},
-                {"ATAN", "atan"},
+                {"ASIN", "arcsin"},
+                {"ACOS", "arccos"},
+                {"ATAN", "arctg"},
                 {"LOG", "log"},
                 {"EXP", "exp"},
                 {"LOG10", "log10"},
                 {"SQRT", "sqrt"},
-                {"ABS", "abs"},
+                {"ABS", "|"},
                 {"∫", "integral"},
+                {"STEP", "power"},
             };
 
             var retString = InputText;
@@ -500,13 +501,20 @@ namespace TestsBuilder.ViewModels
 
         public string ConvertToMathJax(string input)
         {
-            string integralPattern = @"integral\(([^()]+),\s*([^()]+),\s*([^()]+)\)";
+            string integralPattern = @"integral([(]{1}([^\s]+),?([^\s]+),?([^\s)]+))";
             input = Regex.Replace(input, integralPattern, match =>
             {
-                string expression = match.Groups[1].Value.Trim();
+                string expression = match.Groups[2].Value.Trim();
                 string lowerLimit = match.Groups[3].Value.Trim();
                 string upperLimit = match.Groups[4].Value.Trim();
                 return $@"\int_{{{lowerLimit}}}^{{{upperLimit}}} {{{expression}}} \, dx";
+            });
+
+            string intPattern = @"integral\(([^\s]+)\)";
+            input = Regex.Replace(input, intPattern, match =>
+            {
+                string expression = match.Groups[1].Value.Trim();
+                return $@"\int{{{expression}}} \, dx";
             });
             // Обработка sqrt(F(x))
             string sqrtPattern = @"sqrt\(([^()]+|(?<Level>\()|(?<-Level>\)))+(?(Level)(?!))\)";
@@ -516,6 +524,29 @@ namespace TestsBuilder.ViewModels
                 return $@"\sqrt{{{expressionInside}}}";
             });
 
+            // Обработка возведения в степень power(base, exponent)
+            string powerPattern = @"power\(([^,]+),\s*([^()]+)\)";
+            input = Regex.Replace(input, powerPattern, match =>
+            {
+                string baseExpression = match.Groups[1].Value.Trim();
+                string exponent = match.Groups[2].Value.Trim();
+
+                // Проверяем, содержит ли основание деление
+                if (baseExpression.Contains("/"))
+                {
+                    baseExpression = $@"\left({baseExpression}\right)";
+                }
+                else
+                {
+                    // Убираем внешние скобки, если они есть
+                    if (baseExpression.StartsWith("(") && baseExpression.EndsWith(")"))
+                    {
+                        baseExpression = baseExpression.Substring(1, baseExpression.Length - 2).Trim();
+                    }
+                }
+
+                return $@"{{{baseExpression}}}^{{{exponent}}}";
+            });
             // Обработка дробей g(x)/f(x)
             string fractionPattern = @"\(([^()]+)\)\s*\/\s*\(([^()]+)\)";
 
@@ -541,7 +572,6 @@ namespace TestsBuilder.ViewModels
                     </script>
                 </head>
                 <body>
-                    <p>MathJax formula:</p>
                     <div id='math-container'>
                         $$ {mathJaxExpression} $$
                     </div>

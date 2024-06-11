@@ -50,7 +50,7 @@ namespace TestsBuilder.ViewModels
         public async Task Materials()
         {
             _dbService.ClearCurrentTest();
-            await Shell.Current.GoToAsync(nameof(MaterialsPage));
+            await Shell.Current.GoToAsync($"{nameof(MaterialsPage)}");
         }
 
         [RelayCommand]
@@ -58,7 +58,7 @@ namespace TestsBuilder.ViewModels
         public async Task Profile()
         {
             _dbService.ClearCurrentTest();
-            await Shell.Current.GoToAsync(nameof(ProfilePage));
+            await Shell.Current.GoToAsync($"{nameof(ProfilePage)}");
         }
 
         [RelayCommand]
@@ -67,7 +67,7 @@ namespace TestsBuilder.ViewModels
         async Task GoTests()
         {
             _dbService.ClearCurrentTest();
-            await Shell.Current.GoToAsync(nameof(TestsPage));
+            await Shell.Current.GoToAsync($"{nameof(TestsPage)}");
         }
 
         async Task GetTestsAsync()

@@ -39,7 +39,6 @@ namespace TestsBuilder
                 .AddTransient<MaterialsPageViewModel>()
                 .AddTransient<SolutionTestPageViewModel>()
                 .AddTransient<UserTestsPageViewModel>();
-
             return services;
         }
     }

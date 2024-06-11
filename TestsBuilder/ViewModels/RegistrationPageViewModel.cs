@@ -121,7 +121,13 @@ namespace TestsBuilder.ViewModels
         }
         private async Task GoToUserTestsPage()
         {
-            await Shell.Current.GoToAsync($"//{nameof(UserTestsPage)}");
+            await Shell.Current.GoToAsync($"{nameof(UserTestsPage)}");
+        }
+
+        [RelayCommand]
+        private async Task GoToLoginPage()
+        {
+            await Shell.Current.GoToAsync($"{nameof(LoginPage)}");
         }
     }
 }
