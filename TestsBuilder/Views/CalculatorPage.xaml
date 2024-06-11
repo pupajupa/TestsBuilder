@@ -180,7 +180,7 @@
             Style="{StaticResource ScientificOperatorButtonStyle}"
             Text="STEP"
             Command="{Binding ScientificOperatorCommand}"
-            CommandParameter="^" />
+            CommandParameter="STEP" />
 
             <Button
             Grid.Row="1"
@@ -491,9 +491,9 @@
             Grid.Row="5"
             Grid.Column="2"
             Style="{StaticResource ScientificOperatorButtonStyle}"
-            Text="dy"
+            Text="C"
             Command="{Binding NumberInputCommand}" 
-            CommandParameter="dy" />
+            CommandParameter="C" />
             <Button
             Grid.Row="5"
             Grid.Column="7" 

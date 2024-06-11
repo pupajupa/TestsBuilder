@@ -30,10 +30,10 @@
             <Button Text="Добавить задание" HorizontalOptions="EndAndExpand" Grid.Column="2" BackgroundColor="#7D90D7" TextColor="Black"
                     VerticalOptions="Center" FontSize="18" CornerRadius="20" WidthRequest="190" HeightRequest="28" Command="{Binding EnterCommand}"/>
         </Grid>
-        <ListView ItemsSource="{Binding Examples}" Margin="0,30,0,0">
+        <ListView ItemsSource="{Binding Examples}" Margin="0,30,0,0" RowHeight="50">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="model:Example">
-                    <ViewCell Height="30">
+                    <ViewCell>
                         <StackLayout>
                             <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer CommandParameter="{Binding .}"

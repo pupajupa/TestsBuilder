@@ -57,8 +57,8 @@ namespace TestsBuilder.ViewModels
 
         private async Task SaveFormulaAsync()
         {
-            InputText = NormalizeInputString();
             formulaStr = InputText;
+            InputText = NormalizeInputString();
             UpdateFormula(InputText);
             InputText = string.Empty;
         }
@@ -69,6 +69,7 @@ namespace TestsBuilder.ViewModels
             {
                 NewAnswer += "\n";
             }
+            InputText = NormalizeInputString();
             NewAnswer += InputText;
             string answer = InputText;
             BaseAnswers.Add(new BaseAnswer { Text = answer, ExampleId = Example.Id });
@@ -377,7 +378,7 @@ namespace TestsBuilder.ViewModels
 
             if (isSciOpWaiting)
             {
-                InputText += ")";
+                InputText += "";
                 isSciOpWaiting = false;
             }
 
@@ -408,6 +409,7 @@ namespace TestsBuilder.ViewModels
                 {"ACOS", "arccos"},
                 {"ATAN", "arctg"},
                 {"LOG", "log"},
+                {"LN", "ln"},
                 {"EXP", "exp"},
                 {"LOG10", "log10"},
                 {"SQRT", "sqrt"},
@@ -501,7 +503,13 @@ namespace TestsBuilder.ViewModels
 
         public string ConvertToMathJax(string input)
         {
-            string integralPattern = @"integral([(]{1}([^\s]+),?([^\s]+),?([^\s)]+))";
+            string intPattern = @"integral\(([^,]+)\)";
+            input = Regex.Replace(input, intPattern, match =>
+                {
+                    string expression = match.Groups[1].Value.Trim();
+                    return $@"\int{{{expression}}} \, dx";
+                });     
+            string integralPattern = @"integral([(]{1}([^\s]+), ?([^\s]+), ?([^\s)]+))";
             input = Regex.Replace(input, integralPattern, match =>
             {
                 string expression = match.Groups[2].Value.Trim();
@@ -510,12 +518,6 @@ namespace TestsBuilder.ViewModels
                 return $@"\int_{{{lowerLimit}}}^{{{upperLimit}}} {{{expression}}} \, dx";
             });
 
-            string intPattern = @"integral\(([^\s]+)\)";
-            input = Regex.Replace(input, intPattern, match =>
-            {
-                string expression = match.Groups[1].Value.Trim();
-                return $@"\int{{{expression}}} \, dx";
-            });
             // Обработка sqrt(F(x))
             string sqrtPattern = @"sqrt\(([^()]+|(?<Level>\()|(?<-Level>\)))+(?(Level)(?!))\)";
             input = Regex.Replace(input, sqrtPattern, match =>
@@ -549,12 +551,10 @@ namespace TestsBuilder.ViewModels
             });
             // Обработка дробей g(x)/f(x)
             string fractionPattern = @"\(([^()]+)\)\s*\/\s*\(([^()]+)\)";
-
             input = Regex.Replace(input, fractionPattern, match =>
             {
-                string[] parts = match.Value.Split('/');
-                string numerator = parts[0].Trim();
-                string denominator = parts[1].Trim();
+                string numerator = match.Groups[1].Value.Trim();
+                string denominator = match.Groups[2].Value.Trim();
                 return $@"\frac{{{numerator}}}{{{denominator}}}";
             });
             return input;

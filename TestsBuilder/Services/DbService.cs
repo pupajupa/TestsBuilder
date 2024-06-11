@@ -9,7 +9,7 @@ namespace TestsBuilder.Services
 {
     public class DbService : IDbService
     {
-        private const string _dbName = "TestsBuilderDb7.db3";
+        private const string _dbName = "TestsBuilderDb8.db3";
         public const SQLiteOpenFlags Flags =
             SQLite.SQLiteOpenFlags.ReadWrite |
             SQLiteOpenFlags.Create |
