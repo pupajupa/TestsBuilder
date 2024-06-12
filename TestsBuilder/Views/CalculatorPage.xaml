@@ -248,8 +248,9 @@
             Grid.Row="2"
             Grid.Column="0"
             Style="{StaticResource ScientificOperatorButtonStyle}"
-            Text="AC"
-            Command="{Binding ResetCommand}" />
+            Text=" "
+            Command="{Binding MathOperatorCommand}" 
+            CommandParameter=" "/>
 
             <Button
             Grid.Row="2"

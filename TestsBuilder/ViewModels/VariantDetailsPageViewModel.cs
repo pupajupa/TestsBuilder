@@ -18,6 +18,10 @@ namespace TestsBuilder.ViewModels
         [ObservableProperty]
         ExampleVariant variant;
 
+        [ObservableProperty]
+        private string textAnswerStr;
+        [ObservableProperty]
+        private HtmlWebViewSource textAnswer;
 
         [ObservableProperty]
         private HtmlWebViewSource formula;
@@ -32,6 +36,7 @@ namespace TestsBuilder.ViewModels
             Variant = _dbService.GetCurrentExampleVariant();
             FormulaStr = Variant.Expression;
             FormulaStr = NormalizeInputString(FormulaStr);
+
             UpdateFormula(FormulaStr);
         }
         private string NormalizeInputString(string text)
@@ -91,36 +96,13 @@ namespace TestsBuilder.ViewModels
 
         public string ConvertToMathJax(string input)
         {
-            string intPattern = @"integral\(([^,]+)\)";
-            input = Regex.Replace(input, intPattern, match =>
-            {
-                string expression = match.Groups[1].Value.Trim();
-                return $@"\int{{{expression}}} \, dx";
-            });
-            string integralPattern = @"integral([(]{1}([^\s]+), ?([^\s]+), ?([^\s)]+))";
-            input = Regex.Replace(input, integralPattern, match =>
-            {
-                string expression = match.Groups[2].Value.Trim();
-                string lowerLimit = match.Groups[3].Value.Trim();
-                string upperLimit = match.Groups[4].Value.Trim();
-                return $@"\int_{{{lowerLimit}}}^{{{upperLimit}}} {{{expression}}} \, dx";
-            });
-
-            // Обработка sqrt(F(x))
-            string sqrtPattern = @"sqrt\(([^()]+|(?<Level>\()|(?<-Level>\)))+(?(Level)(?!))\)";
-            input = Regex.Replace(input, sqrtPattern, match =>
-            {
-                string expressionInside = match.Value.Substring(5, match.Value.Length - 6);
-                return $@"\sqrt{{{expressionInside}}}";
-            });
-
             // Обработка возведения в степень power(base, exponent)
-            string powerPattern = @"power\(([^,]+),\s*([^()]+)\)";
+            string powerPattern = @"power\(([^\s].*?)\,([^\s].*?\)(?=\+|\-|\*|\/|\n|$))";
             input = Regex.Replace(input, powerPattern, match =>
             {
                 string baseExpression = match.Groups[1].Value.Trim();
                 string exponent = match.Groups[2].Value.Trim();
-
+                exponent = exponent.Remove(exponent.Length - 1);
                 // Проверяем, содержит ли основание деление
                 if (baseExpression.Contains("/"))
                 {
@@ -137,40 +119,116 @@ namespace TestsBuilder.ViewModels
 
                 return $@"{{{baseExpression}}}^{{{exponent}}}";
             });
-            // Обработка дробей g(x)/f(x)
-            string fractionPattern = @"\(([^()]+)\)\s*\/\s*\(([^()]+)\)";
+
+            string fractionPattern = @"(\((?>[^()]+|(?1))*\))\/(\((?>[^()]+|(?1))*\))";
             input = Regex.Replace(input, fractionPattern, match =>
             {
                 string numerator = match.Groups[1].Value.Trim();
                 string denominator = match.Groups[2].Value.Trim();
                 return $@"\frac{{{numerator}}}{{{denominator}}}";
             });
+
+            string integralPattern = @"integral([(]{1}(.*[^\s].*), ?([^\s\n]+), ?([^\s]+))";
+            if (Regex.IsMatch(input, integralPattern))
+            {
+                input = Regex.Replace(input, integralPattern, match =>
+                {
+                    string expression = match.Groups[2].Value.Trim();
+                    string lowerLimit = match.Groups[3].Value.Trim();
+                    string upperLimit = match.Groups[4].Value.Trim();
+                    return $@"\int_{{{lowerLimit}}}^{{{upperLimit}}} {{{expression}}} \, dx";
+                });
+            }
+            else
+            {
+                string intPattern = @"integral\((.*[^\s]+.*)\)";
+                input = Regex.Replace(input, intPattern, match =>
+                {
+                    string expression = match.Groups[1].Value.Trim();
+                    return $@"\int{{{expression}}} \, dx";
+                });
+            }
+            // Обработка sqrt(F(x))
+            string sqrtPattern = @"sqrt\(([^()]+|(?<Level>\()|(?<-Level>\)))+(?(Level)(?!))\)";
+            input = Regex.Replace(input, sqrtPattern, match =>
+            {
+                string expressionInside = match.Value.Substring(5, match.Value.Length - 6);
+                return $@"\sqrt{{{expressionInside}}}";
+            });
+            // Обработка дробей g(x)/f(x)
             return input;
-        }
+        }   
+
 
 
         public string GenerateHtml(string mathJaxExpression)
         {
             return $@"
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <script type='text/javascript' async
-                        src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML'>
-                    </script>
-                </head>
-                <body>
-                    <div id='math-container'>
-                        $$ {mathJaxExpression} $$
-                    </div>
-                </body>
-                </html>";
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <style>
+                body {{
+                    margin: 0;
+                    overflow: hidden; /* Отключаем прокрутку */
+                    background-color: #99B5EB; /* Цвет заднего фона */
+                }}
+                #math-container {{
+                    font-size: 24px; /* Размер текста */
+                    color: #333; /* Цвет текста (если необходимо) */
+                }}
+            </style>
+            <script type='text/javascript' async
+                src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML'>
+            </script>
+        </head>
+        <body>
+            <div id='math-container'>
+                $$ {mathJaxExpression} $$
+            </div>
+        </body>
+        </html>";
+        }
+
+        public string GenerateHtmlAnswer(string mathJaxExpression)
+        {
+            return $@"
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <style>
+                body {{
+                    margin: 0;
+                    overflow: hidden; /* Отключаем прокрутку */
+                    background-color: #99B5EB; /* Цвет заднего фона */
+                }}
+                #math-container {{
+                    font-size: 20px; /* Размер текста */
+                    color: #333; /* Цвет текста (если необходимо) */
+                }}
+            </style>
+            <script type='text/javascript' async
+                src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML'>
+            </script>
+        </head>
+        <body>
+            <div id='math-container'>
+                $$ {mathJaxExpression} $$
+            </div>
+        </body>
+        </html>";
         }
 
         public void UpdateFormula(string expression)
         {
             var htmlContent = GenerateHtml(ConvertToMathJax(expression));
             Formula = new HtmlWebViewSource { Html = htmlContent };
+        }
+
+        public void UpdateAnswer(string textAnswer)
+        {
+            var htmlContent = GenerateHtml(ConvertToMathJax(textAnswer));
+            TextAnswer = new HtmlWebViewSource { Html = htmlContent };
         }
     }
 }
