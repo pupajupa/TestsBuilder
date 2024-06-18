@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -13,14 +14,11 @@ namespace TestsBuilder.ViewModels
 {
     public partial class SolutionTestPageViewModel : BaseViewModel
     {
-
-
         private readonly IDbService _dbService;
         private List<Example> examplesList = new();
         public ObservableCollection<Example> examples { get; set; } = new();
 
         public ObservableCollection<Solution> Solutions { get; set; } = new();
-        public ObservableCollection<HtmlWebViewSource> Formules { get; set; } = new();
         public SolutionTestPageViewModel(IDbService dbService)
         {
             _dbService = dbService;
@@ -44,6 +42,7 @@ namespace TestsBuilder.ViewModels
                             {
                                 solution.CorrectAnswer = ans.Text;
                             }
+                            solutionAnswer.IsSelected = false;
                             solution.Answers.Add(solutionAnswer);
                         }
                         formulaStr = userVariant.Expression;
@@ -51,6 +50,7 @@ namespace TestsBuilder.ViewModels
                         Formula = UpdateFormula(formulaStr);
                         solution.Formula = Formula;
                         Solutions.Add(solution);
+                        Debug.WriteLine($"Added solution with {solution.Answers.Count} answers");
                     }
                 }
             }
@@ -59,7 +59,6 @@ namespace TestsBuilder.ViewModels
         [ObservableProperty]
         Test test;
 
-        [ObservableProperty]
         TestResult result;
 
         [ObservableProperty]
@@ -156,7 +155,6 @@ namespace TestsBuilder.ViewModels
                     <style>
                         #math-container {{
                         font-size: 24px; /* Размер текста */
-                        color: #333; /* Цвет текста (если необходимо) */
                         }}
                     </style>
                     <script type='text/javascript' async

@@ -38,6 +38,7 @@ namespace TestsBuilder.Services
             else
             {
                 Database = new SQLiteConnection(_dbPath, Flags);
+                Database.CreateTable<Material>();
                 Database.CreateTable<Student>();
                 Database.CreateTable<Teacher>();
                 Database.CreateTable<Answer>();
@@ -238,12 +239,30 @@ namespace TestsBuilder.Services
         public IEnumerable<Example> GetAllExpressionsByTestId(int testId)
         {
             Init();
-            return Database.Table<Example>().Where(e => e.TestId == testId).ToList();
+
+            var examples = Database.Table<Example>().Where(e => e.TestId == testId).ToList();
+
+            foreach(var ex in examples)
+            {
+                Database.GetChildren(ex);
+            }
+
+            return examples;
         }
         public IEnumerable<ExampleVariant> GetAllExpressionVariantsByExampleId(int exampleId)
         {
             Init();
-            return Database.Table<ExampleVariant>().Where(e => e.ExampleId == exampleId).ToList();
+            var exampleVariants = Database.Table<ExampleVariant>()
+                                           .Where(e => e.ExampleId == exampleId)
+                                           .ToList();
+
+            // Загрузка связанных ответов для каждого варианта
+            foreach (var variant in exampleVariants)
+            {
+                Database.GetChildren(variant);
+            }
+
+            return exampleVariants;
         }
 
         public TestResult GetTestResultByTestId(int testId)
@@ -385,6 +404,16 @@ namespace TestsBuilder.Services
 
                 example.BaseAnswers.Add(baseAnswer);
             }
+        }
+
+        public void AddMaterial(Material material)
+        {
+            Database.Insert(material);
+        }
+
+        public List<Material> GetAllMaterials()
+        {
+            return Database.Table<Material>().ToList();
         }
     }
 }
