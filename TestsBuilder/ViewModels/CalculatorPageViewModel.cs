@@ -540,7 +540,7 @@ namespace TestsBuilder.ViewModels
 
             string fractionPattern = @"([^\s]+)\/([^\s]+)";
 
-            input = Regex.Replace(input, fractionPattern, match =>
+            input = Regex.Replace(input, fractionPattern, match =>  
             {
                 string numerator = match.Groups[1].Value.Trim();
                 string denominator = match.Groups[2].Value.Trim();

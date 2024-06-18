@@ -35,14 +35,13 @@
                         <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
                             <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer                                    
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:UserTestsPageViewModel}}, Path=GoToSolutionTestPageCommand}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:UserTestsPageViewModel}}, Path=GoToSolutionsPageCommand}"
                                     CommandParameter="{Binding .}"/>
                             </StackLayout.GestureRecognizers>
                             <Label Text="{Binding Test.Name}" TextColor="Black" FontSize="20" VerticalOptions="Center" Grid.Column="1"/>
                             <Label Text="{Binding Result.IsCompleted, Converter={StaticResource BoolToTextConverter}}" 
                                     VerticalOptions="Center"
-                                    HorizontalOptions="FillAndExpand"
-                                    BackgroundColor="Black"
+                                    HorizontalOptions="End"
                                     FontSize="20"
                                     FontAttributes="Bold"
                                     IsEnabled="{Binding Result.IsCompleted, Converter={StaticResource InverseBoolConverter}}"/>

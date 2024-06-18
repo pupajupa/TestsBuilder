@@ -2,11 +2,50 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TestsBuilder.Views.SolutionTestPage"
-             Title="SolutionTestPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:viewmodel="clr-namespace:TestsBuilder.ViewModels"
+             x:DataType="viewmodel:SolutionTestPageViewModel"
+             xmlns:model="clr-namespace:TestsBuilder.Models"
+             Shell.TitleColor="#99B5EB"
+             Shell.BackgroundColor="#99B5EB"
+             BackgroundColor="#D9E0ED">
+    <StackLayout Margin="40,20" Orientation="Vertical">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.3*"/>
+                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition Width="0.3*"/>
+            </Grid.ColumnDefinitions>
+            <Label Text="Ваши тесты" FontSize="32" TextColor="Black" HorizontalOptions="Start" Grid.Column="0" VerticalTextAlignment="Center"/>
+            <Button Text="Создать тест" HorizontalOptions="EndAndExpand" Grid.Column="2" BackgroundColor="#7D90D7" 
+                    TextColor="Black" VerticalOptions="Center" FontSize="18" CornerRadius="20" WidthRequest="180" HeightRequest="28"
+                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TestsPageViewModel}}, Path=EnterCommand}"/>
+        </Grid>
+        <ListView ItemsSource="{Binding Solutions}" RowHeight="50" Margin="0,30,0,0">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType ="model:Solution">
+                    <ScrollView>
+                        <Frame HorizontalOptions="Center" BackgroundColor="#99B5EB" VerticalOptions="Center" BorderColor="Black"  WidthRequest="500">
+                            <StackLayout Orientation="Vertical" Padding="20" VerticalOptions="Center">
+                                <WebView Source="{Binding Formula}" HeightRequest="90" WidthRequest="300"  Margin="0,10,0,0"  HorizontalOptions="Center" MaximumHeightRequest="90"/>
+
+                                <Label Text="Ответы:" FontSize="24" TextColor="Black" FontAttributes="Bold" Margin="0,10,0,0" HorizontalOptions="Center"/>
+                                <ListView ItemsSource="{Binding Answers}" Margin="0,5,0,0" HorizontalOptions="Center">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate x:DataType="model:SolutionAnswer">
+                                            <ViewCell>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" VerticalOptions="Center"/>
+                                                    <Label Text="{Binding Text}" FontSize="24" HorizontalOptions="Center" TextColor="Black" VerticalTextAlignment="Center"/>
+                                                </StackLayout>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackLayout>
+                        </Frame>
+                    </ScrollView>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>

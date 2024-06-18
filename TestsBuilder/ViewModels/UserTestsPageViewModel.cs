@@ -80,15 +80,10 @@ namespace TestsBuilder.ViewModels
         }
 
         [RelayCommand]
-        async Task GoToSolutionsPage(Test test)
+        async Task GoToSolutionsPage(TestWithResult test)
         {
-            if (test is null)
-                return;
-            await Shell.Current.GoToAsync($"{nameof(SolutionTestPage)}", true,
-                new Dictionary<string, object>
-                {
-                    {"Test",test}
-                });
+            _dbService.SetCurrentTest(test.Test.Id);
+            await Shell.Current.GoToAsync($"{nameof(SolutionTestPage)}");
         }
     }
 }
