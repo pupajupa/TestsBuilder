@@ -415,5 +415,11 @@ namespace TestsBuilder.Services
         {
             return Database.Table<Material>().ToList();
         }
+
+        public void AddTestResult(TestResult result)
+        {
+            Init();
+            Database.Insert(result);
+        }
     }
 }

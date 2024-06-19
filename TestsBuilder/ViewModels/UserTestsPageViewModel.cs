@@ -68,7 +68,7 @@ namespace TestsBuilder.ViewModels
         }
         public async Task Materials()
         {
-            await Shell.Current.GoToAsync($"{nameof(MaterialsPage)}");
+            await Shell.Current.GoToAsync($"{nameof(UserMaterialsPage)}");
         }
 
         [RelayCommand]
@@ -83,6 +83,12 @@ namespace TestsBuilder.ViewModels
         async Task GoToSolutionsPage(TestWithResult test)
         {
             _dbService.SetCurrentTest(test.Test.Id);
+            var result = _dbService.GetTestResultByTestId(test.Test.Id);
+            if (result.StudentId == _dbService.GetCurrentStudent().Id)
+            {
+                await Shell.Current.DisplayAlert("Тест пройден", $"Ваш результат: {result.Score}", "OK");
+                return;
+            }
             await Shell.Current.GoToAsync($"{nameof(SolutionTestPage)}");
         }
     }

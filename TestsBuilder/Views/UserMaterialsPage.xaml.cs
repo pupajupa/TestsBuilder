@@ -1,14 +1,10 @@
-    using TestsBuilder.Models;
-using TestsBuilder.Services;
-using Microsoft.Maui.Media;
-using System.IO;
 using TestsBuilder.ViewModels;
 
 namespace TestsBuilder.Views;
 
-public partial class ProfilePage : ContentPage
+public partial class UserMaterialsPage : ContentPage
 {
-	public ProfilePage(ProfilePageViewModel viewModel)
+	public UserMaterialsPage(UserMaterialsPageViewModel viewModel)
 	{
 		InitializeComponent();
         BindingContext = viewModel;

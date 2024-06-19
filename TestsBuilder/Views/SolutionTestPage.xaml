@@ -18,27 +18,35 @@
             <Label Text="{Binding Test.Name}" FontSize="32" TextColor="Black" HorizontalOptions="Start" Grid.Column="0" VerticalTextAlignment="Center"/>
             <Button Text="Закончить" HorizontalOptions="EndAndExpand" Grid.Column="2" BackgroundColor="#7D90D7" 
                     TextColor="Black" VerticalOptions="Center" FontSize="18" CornerRadius="20" WidthRequest="180" HeightRequest="28"
-                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SolutionTestPageViewModel}}, Path=EnterCommand}"/>
+                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SolutionTestPageViewModel}}, Path=FinishTestCommand}"/>
         </Grid>
-        <ListView ItemsSource="{Binding Solutions}" RowHeight="50" Margin="0,30,0,0">
+        <ListView ItemsSource="{Binding Solutions}" Margin="0,30,0,0">
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType ="model:Solution">
-                    <StackLayout Orientation="Vertical" Padding="20" VerticalOptions="Center">
-                        <WebView Source="{Binding Formula}" HeightRequest="90" WidthRequest="300"  Margin="0,10,0,0"  HorizontalOptions="Center" MaximumHeightRequest="90"/>
-                        <Label Text="Ответы:" FontSize="24" TextColor="Black" FontAttributes="Bold" Margin="0,10,0,0" HorizontalOptions="Center"/>
-                        <ListView ItemsSource="{Binding Answers}" Margin="0,5,0,0" HorizontalOptions="Center">
-                            <ListView.ItemTemplate>
-                                <DataTemplate x:DataType="model:SolutionAnswer">
-                                    <ViewCell>
-                                        <StackLayout Orientation="Horizontal">
-                                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" VerticalOptions="Center"/>
-                                            <Label Text="{Binding Text}" FontSize="24" HorizontalOptions="Center" TextColor="Black" VerticalTextAlignment="Center"/>
-                                        </StackLayout>
-                                    </ViewCell>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </StackLayout>
+                <DataTemplate x:DataType="model:Solution">
+                    <ViewCell>
+                        <StackLayout Orientation="Vertical" Padding="20" VerticalOptions="Center" BackgroundColor="#99B5EB">
+                            <WebView Source="{Binding Formula}" WidthRequest="300" Margin="0,10,0,0" HorizontalOptions="Center" MaximumHeightRequest="120" MinimumHeightRequest="100"
+                                     BackgroundColor="Black"/>
+                            <Label Text="Ответы:" FontSize="24" TextColor="Black" FontAttributes="Bold" Margin="0,10,0,0" HorizontalOptions="Center"/>
+                            <ListView ItemsSource="{Binding Answers}" Margin="0,5,0,0" HorizontalOptions="Center" HasUnevenRows="True">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:SolutionAnswer">
+                                        <ViewCell>
+                                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Margin="5" BackgroundColor="#D9E0ED">
+                                                <RadioButton GroupName="{Binding GroupName}" Content="{Binding Text}" IsChecked="{Binding IsSelected, Mode=TwoWay}" 
+                                                             FontSize="24" VerticalOptions="Center" TextColor="Black" CornerRadius="5">
+                                                    <RadioButton.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SolutionTestPageViewModel}}, Path=RadioButtonCheckedChangeCommand}" CommandParameter="{Binding .}"/>
+                                                    </RadioButton.GestureRecognizers>
+                                                </RadioButton>
+                                            </StackLayout>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                            <BoxView Color="#7D90D7ED" HeightRequest="5" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TestsBuilder.Views.MaterialsPage"
+             x:Class="TestsBuilder.Views.UserMaterialsPage"
              xmlns:viewmodel="clr-namespace:TestsBuilder.ViewModels"
-             x:DataType="viewmodel:MaterialsPageViewModel"
+             x:DataType="viewmodel:UserMaterialsPageViewModel"
              xmlns:model="clr-namespace:TestsBuilder.Models"
-             Title="{Binding Title}"
              Shell.TitleColor="#99B5EB"
              Shell.BackgroundColor="#99B5EB"
              BackgroundColor="#D9E0ED">
     <Shell.TitleView>
         <StackLayout Orientation="Horizontal" Padding="0,0,40,0">
-            <Button Text="Личный кабинет"  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MaterialsPageViewModel}}, Path=GoToProfilePageCommand}"
+            <Button Text="Личный кабинет"  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:UserMaterialsPageViewModel}}, Path=GoToProfilePageCommand}"
                     BackgroundColor="Transparent" TextColor="Black" FontSize="18" HorizontalOptions="EndAndExpand"/>
-            <Button Text="Тесты"  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MaterialsPageViewModel}},Path=GoToTestsPageCommand}"
+            <Button Text="Тесты"  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:UserMaterialsPageViewModel}},Path=GoToTestsPageCommand}"
                     BackgroundColor="Transparent" TextColor="Black" FontSize="18"/>
-            <Button Text="Материалы"  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MaterialsPageViewModel}}, Path=GoToMaterialsPageCommand}"
+            <Button Text="Материалы"  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:UserMaterialsPageViewModel}}, Path=GoToMaterialsPageCommand}"
                     BackgroundColor="Transparent" TextColor="Black" FontSize="18"/>
         </StackLayout>
     </Shell.TitleView>
@@ -26,10 +25,7 @@
                 <ColumnDefinition Width="0.4*"/>
                 <ColumnDefinition Width="0.3*"/>
             </Grid.ColumnDefinitions>
-            <Label Text="Материалы" FontSize="32" TextColor="Black" HorizontalOptions="Start" Grid.Column="0" VerticalTextAlignment="Center"/>
-            <Button Text="Добавить материалы" HorizontalOptions="EndAndExpand" Grid.Column="2" BackgroundColor="#7D90D7" 
-                    TextColor="Black" VerticalOptions="Center" FontSize="18" CornerRadius="20" WidthRequest="180" HeightRequest="28"
-                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MaterialsPageViewModel}}, Path=UploadMaterialCommand}"/>
+            <Label Text="Материалы" FontSize="32" TextColor="Black" HorizontalOptions="Center" Grid.Column="1" VerticalTextAlignment="Center"/>
         </Grid>
         <ListView ItemsSource="{Binding Materials}" RowHeight="50" Margin="0,30,0,0">
             <ListView.ItemTemplate>

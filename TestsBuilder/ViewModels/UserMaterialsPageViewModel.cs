@@ -11,12 +11,12 @@ using TestsBuilder.Views;
 
 namespace TestsBuilder.ViewModels
 {
-    public partial class MaterialsPageViewModel:BaseViewModel
+    public partial class UserMaterialsPageViewModel:BaseViewModel
     {
         private readonly IDbService _dbService;
         public ObservableCollection<Material> Materials { get; set; } = new ObservableCollection<Material>();
 
-        public MaterialsPageViewModel(IDbService dbService)
+        public UserMaterialsPageViewModel(IDbService dbService)
         {
             Title = "";
             _dbService = dbService;
@@ -33,30 +33,6 @@ namespace TestsBuilder.ViewModels
                     Materials.Add(material);
                 }
             }
-        }
-
-        [RelayCommand]
-        private async Task UploadMaterialAsync()
-        {
-            // Код для выбора файла и его загрузки
-            var file = await PickFileAsync();
-            if (file != null)
-            {
-                var material = new Material
-                {
-                    Name = file.FileName,
-                    FilePath = file.FullPath,
-                };
-                _dbService.AddMaterial(material);
-                Materials.Add(material);
-            }
-        }
-
-        private async Task<FileResult> PickFileAsync()
-        {
-            // Код для выбора файла (может отличаться в зависимости от платформы)
-            var result = await FilePicker.PickAsync();
-            return result;
         }
 
         [RelayCommand]
@@ -78,7 +54,7 @@ namespace TestsBuilder.ViewModels
         public async Task MaterialsView()
         {
             _dbService.ClearCurrentTest();
-            await Shell.Current.GoToAsync($"{nameof(MaterialsPage)}");
+            await Shell.Current.GoToAsync($"{nameof(UserMaterialsPage)}");
         }
 
         [RelayCommand]
@@ -95,7 +71,7 @@ namespace TestsBuilder.ViewModels
         async Task GoTests()
         {
             _dbService.ClearCurrentTest();
-            await Shell.Current.GoToAsync($"{nameof(TestsPage)}");
+            await Shell.Current.GoToAsync($"{nameof(UserTestsPage)}");
         }
     }
 }

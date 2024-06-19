@@ -10,7 +10,6 @@ namespace TestsBuilder.Models
     {
         public HtmlWebViewSource Formula { get; set; }
         public List<SolutionAnswer> Answers { get; set; } = new();
-
         public string CorrectAnswer { get; set; }
     }
 }

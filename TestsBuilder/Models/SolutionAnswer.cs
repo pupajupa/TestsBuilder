@@ -10,5 +10,7 @@ namespace TestsBuilder.Models
     {
         public string Text { get; set; }
         public bool IsSelected { get; set; }
+
+        public string GroupName { get; set; }
     }
 }

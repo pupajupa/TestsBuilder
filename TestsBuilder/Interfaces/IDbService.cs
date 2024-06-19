@@ -10,6 +10,8 @@ namespace TestsBuilder.Interfaces
     public interface  IDbService
     {
         void Init();
+
+        void AddTestResult(TestResult result);
         void AddMaterial(Material material);
         List<Material> GetAllMaterials();
         public Student GetCurrentStudent();
