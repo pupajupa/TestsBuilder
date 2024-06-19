@@ -19,7 +19,8 @@ namespace TestsBuilder
                 .AddTransient<MaterialsPage>()
                 .AddTransient<ProfilePage>()
                 .AddTransient<SolutionTestPage>()
-                .AddTransient<UserTestsPage>();
+                .AddTransient<UserTestsPage>()
+                .AddTransient<TestResultsPage>();
 
             return services;
         }
@@ -38,7 +39,8 @@ namespace TestsBuilder
                 .AddTransient<StartPageViewModel>()
                 .AddTransient<MaterialsPageViewModel>()
                 .AddTransient<SolutionTestPageViewModel>()
-                .AddTransient<UserTestsPageViewModel>();
+                .AddTransient<UserTestsPageViewModel>()
+                .AddTransient<TestResultsPageViewModel>();
             return services;
         }
     }

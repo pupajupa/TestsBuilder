@@ -15,7 +15,7 @@ namespace TestsBuilder.Interfaces
         void AddMaterial(Material material);
         List<Material> GetAllMaterials();
         public Student GetCurrentStudent();
-
+        List<TestResult> GetAllResultsByTestId(int testId);
         public Teacher GetCurrentTeacher();
         IEnumerable<Student> GetAllStudents();
         Student GetStudentById(int id);

@@ -20,6 +20,7 @@ namespace TestsBuilder
             Routing.RegisterRoute(nameof(UserTestsPage), typeof(UserTestsPage));
             Routing.RegisterRoute(nameof(VariantsPage), typeof(VariantsPage));
             Routing.RegisterRoute(nameof(VariantDetailPage), typeof(VariantDetailPage));
+            Routing.RegisterRoute(nameof(TestResultsPage), typeof(TestResultsPage));
         }
     }
 }

@@ -38,14 +38,17 @@
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:UserTestsPageViewModel}}, Path=GoToSolutionsPageCommand}"
                                     CommandParameter="{Binding .}"/>
                             </StackLayout.GestureRecognizers>
-                            <Label Text="{Binding Test.Name}" TextColor="Black" FontSize="20" VerticalOptions="Center" Grid.Column="1"/>
-                            <Label Text="{Binding Result.IsCompleted, Converter={StaticResource BoolToTextConverter}}" 
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="End"
-                                    FontSize="20"
-                                    FontAttributes="Bold"
-                                    IsEnabled="{Binding Result.IsCompleted, Converter={StaticResource InverseBoolConverter}}"/>
+                            <Label Text="{Binding Test.Name}" TextColor="Black" FontSize="20" VerticalOptions="Center"
+           HorizontalOptions="Start" Margin="10,0,0,0" />
+
+                            <!-- Флексибильная пустота для разделителя, занимающая оставшееся место -->
                             <BoxView Color="#7D90D7ED" HeightRequest="2" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
+
+                            <!-- Второй Label в конце с шириной Auto -->
+                            <Label Text="{Binding Result.Score, Converter={StaticResource BoolToTextConverter}}"
+                                   VerticalOptions="Center" HorizontalOptions="End" Margin="0,0,10,0"
+                                   TextColor="Black" FontSize="26" FontAttributes="Bold"
+                                   IsEnabled="{Binding Result.Score, Converter={StaticResource InverseBoolConverter}}" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

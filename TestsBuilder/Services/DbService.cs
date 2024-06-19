@@ -9,7 +9,7 @@ namespace TestsBuilder.Services
 {
     public class DbService : IDbService
     {
-        private const string _dbName = "TestsBuilderDb8.db3";
+        private const string _dbName = "TestsBuilderDb9.db3";
         public const SQLiteOpenFlags Flags =
             SQLite.SQLiteOpenFlags.ReadWrite |
             SQLiteOpenFlags.Create |
@@ -264,7 +264,12 @@ namespace TestsBuilder.Services
 
             return exampleVariants;
         }
-
+        public List<TestResult> GetAllResultsByTestId(int testId)
+        {
+            // Используем LINQ для выполнения запроса
+            var results = Database.Table<TestResult>().Where(tr => tr.TestId == testId).ToList();
+            return results;
+        }
         public TestResult GetTestResultByTestId(int testId)
         {
             Init();

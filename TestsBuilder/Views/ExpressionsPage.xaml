@@ -19,7 +19,16 @@
         </StackLayout>
     </Shell.TitleView>
     <StackLayout Margin="40,20" Orientation="Vertical">
-        <Label Text="{Binding Test.Name}" FontSize="40" TextColor="Black" HorizontalOptions="Start" Grid.Column="0" VerticalTextAlignment="Center"/>
+        <Grid Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.3*"/>
+                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition Width="0.3*"/>
+            </Grid.ColumnDefinitions>
+            <Label Text="{Binding Test.Name}" FontSize="40" TextColor="Black" HorizontalOptions="Start" Grid.Column="0" VerticalTextAlignment="Center"/>
+            <Button Text="Результаты" HorizontalOptions="EndAndExpand" Grid.Column="2" BackgroundColor="#7D90D7" TextColor="Black"
+        VerticalOptions="Center" FontSize="18" CornerRadius="20" WidthRequest="190" HeightRequest="28" Command="{Binding GoToResultsPageCommand}"/>
+        </Grid>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.3*"/>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TestsBuilder.Views.TestResultsPage"
+             xmlns:viewmodel="clr-namespace:TestsBuilder.ViewModels"
+             xmlns:model ="clr-namespace:TestsBuilder.Models"
+             x:DataType="viewmodel:TestResultsPageViewModel"
+             Shell.TitleColor="#99B5EB"
+             Shell.BackgroundColor="#99B5EB"
+             BackgroundColor="#D9E0ED">
+    <Shell.TitleView>
+        <StackLayout Orientation="Horizontal" Padding="0,0,40,0">
+            <Button Text="Личный кабинет"  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TestResultsPageViewModel}}, Path=GoToProfilePageCommand}"
+                    BackgroundColor="Transparent" TextColor="Black" FontSize="18" HorizontalOptions="EndAndExpand"/>
+            <Button Text="Тесты"  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TestResultsPageViewModel}},Path=GoToTestsPageCommand}"
+                    BackgroundColor="Transparent" TextColor="Black" FontSize="18"/>
+            <Button Text="Материалы"  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TestResultsPageViewModel}}, Path=GoToMaterialsPageCommand}"
+                    BackgroundColor="Transparent" TextColor="Black" FontSize="18"/>
+        </StackLayout>
+    </Shell.TitleView>
+    <StackLayout Margin="40,20" Orientation="Vertical">
+        <Grid Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.3*"/>
+                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition Width="0.3*"/>
+            </Grid.ColumnDefinitions>
+            <Label Text="Результаты" FontSize="40" TextColor="Black" HorizontalOptions="Center" Grid.Column="1" VerticalTextAlignment="Center"/>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.45*"/>
+                <ColumnDefinition Width="0.1*"/>
+                <ColumnDefinition Width="0.45*"/>
+            </Grid.ColumnDefinitions>
+            <Label Text="Студенты:" TextColor="Black" FontAttributes="Bold" FontSize="25" HorizontalOptions="Center" Grid.Column="0" Margin="0,0,0,10"/>
+            <ListView ItemsSource="{Binding Students}" Margin="0,30,0,0" RowHeight="50" Grid.Column="0" HorizontalOptions="Center">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Student">
+                        <ViewCell>
+                            <StackLayout HorizontalOptions="Center">
+                                <HorizontalStackLayout>
+                                    <Label Text="{Binding FirstName}" HorizontalOptions="Center" TextColor="Black" FontSize="22" Margin="0,0,3,0"/>
+                                    <Label Text="{Binding LastName}" TextColor="Black" FontSize="22"/>
+                                </HorizontalStackLayout>
+                                <!-- Другие элементы управления для отображения других свойств теста -->
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label Text="Отметка:" TextColor="Black" FontAttributes="Bold" FontSize="25" Grid.Column="2" HorizontalOptions="Center" Margin="0,0,0,10"/>
+            <ListView ItemsSource="{Binding Results}" Margin="0,30,0,0" RowHeight="50" Grid.Column="2" HorizontalOptions="Center">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="model:TestResult">
+                        <ViewCell>
+                            <StackLayout HorizontalOptions="Center">
+                                <Label Text="{Binding Score}" TextColor="Black" FontSize="22" HorizontalOptions="Center"/>
+                                <!-- Другие элементы управления для отображения других свойств теста -->
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </StackLayout>
+</ContentPage>

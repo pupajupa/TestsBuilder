@@ -111,6 +111,13 @@ namespace TestsBuilder.ViewModels
         }
 
         [RelayCommand]
+        async Task GoToResultsPage() => await Results();
+        public async Task Results()
+        {
+            await Shell.Current.GoToAsync(nameof(TestResultsPage));
+        }
+
+        [RelayCommand]
         async Task GoToMaterialsPage() => await Materials();
 
         public async Task Materials()

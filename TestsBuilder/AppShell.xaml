@@ -54,4 +54,8 @@
     <ShellContent
         ContentTemplate="{DataTemplate view:SolutionTestPage}"
         Route="SolutionTestPage"/>
+
+    <ShellContent
+        ContentTemplate="{DataTemplate view:TestResultsPage}"
+        Route="TestResultsPage"/>
 </Shell>
