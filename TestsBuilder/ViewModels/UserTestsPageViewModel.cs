@@ -84,10 +84,13 @@ namespace TestsBuilder.ViewModels
         {
             _dbService.SetCurrentTest(test.Test.Id);
             var result = _dbService.GetTestResultByTestId(test.Test.Id);
-            if (result.StudentId == _dbService.GetCurrentStudent().Id)
+            if (result != null)
             {
-                await Shell.Current.DisplayAlert("Тест пройден", $"Ваш результат: {result.Score}", "OK");
-                return;
+                if (result.StudentId == _dbService.GetCurrentStudent().Id)
+                {
+                    await Shell.Current.DisplayAlert("Тест пройден", $"Ваш результат: {result.Score}", "OK");
+                    return;
+                }
             }
             await Shell.Current.GoToAsync($"{nameof(SolutionTestPage)}");
         }

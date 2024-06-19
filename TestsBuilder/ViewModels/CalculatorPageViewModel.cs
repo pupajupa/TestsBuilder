@@ -101,7 +101,7 @@ namespace TestsBuilder.ViewModels
         public (int Count, List<string> Operators) CountAndReturnComparisonOperators(string input)
         {
             // Используем регулярное выражение для поиска знаков сравнения
-            string pattern = @"(>=|<=|!=|>|<|=)";
+            string pattern = @"(>=|<=|≠|>|<|=)";
             MatchCollection matches = Regex.Matches(input, pattern);
             List<string> foundOperators = matches.Cast<Match>().Select(m => m.Value).ToList();
             return (matches.Count, foundOperators);
@@ -207,7 +207,7 @@ namespace TestsBuilder.ViewModels
                                 }
                             }
                         }
-                        else if (operators[0] == "=" || operators[0] == "!=")
+                        else if (operators[0] == "=" || operators[0] == "≠")
                         {
                             value1 = FindNumber(InputText);
                             if (value1 == null)
