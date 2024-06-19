@@ -9,6 +9,7 @@ namespace TestsBuilder
         {
             services
                 .AddTransient<LoginPage>()
+                .AddTransient<UserMaterialsPage>()
                 .AddTransient<RegistrationPage>()
                 .AddTransient<StartPage>()
                 .AddTransient<TestsPage>()
@@ -28,6 +29,7 @@ namespace TestsBuilder
         {
             services
                 .AddTransient<TestsPageViewModel>()
+                .AddTransient<UserMaterialsPageViewModel>()
                 .AddTransient<CalculatorPageViewModel>()
                 .AddTransient<ExpressionsPageViewModel>()
                 .AddTransient<BaseViewModel>()

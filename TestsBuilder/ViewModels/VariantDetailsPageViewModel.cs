@@ -28,7 +28,7 @@ namespace TestsBuilder.ViewModels
 
         [ObservableProperty]
         private string formulaStr;
-        public VariantDetailsPageViewModel(IDbService dbService) 
+        public VariantDetailsPageViewModel(IDbService dbService)
         {
             Title = "VariantDetailsPage";
             _dbService = dbService;
@@ -126,6 +126,7 @@ namespace TestsBuilder.ViewModels
         public string ConvertToMathJax(string input)
         {
 
+
             string powerPattern = @"power\(([^\s].*?)\,([^\s].*?\)(?=\+|\-|\*|\/|\n|$))";
             input = PowerCheck(powerPattern, input);
 
@@ -137,27 +138,7 @@ namespace TestsBuilder.ViewModels
                 string denominator = match.Groups[2].Value.Trim();
                 return $@"\frac{{{numerator}}}{{{denominator}}}";
             });
-            //input = Regex.Replace(input, powerPattern, match =>
-            //{
-            //    string baseExpression = match.Groups[1].Value.Trim();       
-            //    string exponent = match.Groups[2].Value.Trim();
-            //    exponent = exponent.Remove(exponent.Length - 1);
-            //    // Проверяем, содержит ли основание деление
-            //    if (baseExpression.Contains("/"))
-            //    {
-            //        baseExpression = $@"\left({baseExpression}\right)";
-            //    }
-            //    else
-            //    {
-            //        // Убираем внешние скобки, если они есть
-            //        if (baseExpression.StartsWith("(") && baseExpression.EndsWith(")"))
-            //        {
-            //            baseExpression = baseExpression.Substring(1, baseExpression.Length - 2).Trim();
-            //        }
-            //    }
 
-            //    return $@"{{{baseExpression}}}^{{{exponent}}}";
-            //});
 
             string integralPattern = @"integral([(]{1}(.*[^\s].*), ?([^\s\n]+), ?([^\s]+))";
             if (Regex.IsMatch(input, integralPattern))
@@ -203,8 +184,13 @@ namespace TestsBuilder.ViewModels
                 <head>
                     <style>
                         #math-container {{
-                        font-size: 24px; /* Размер текста */
-                        color: #333; /* Цвет текста (если необходимо) */
+                            font-size: 28px; /* Размер текста */
+                            color: #333; /* Цвет текста (если необходимо) */
+                            background-color: #99B5EB; /* Цвет заднего фона */
+                            border: 1px solid black; /* Граница для отладки */
+                        }}
+                        body {{
+                            background-color: #99B5EB; /* Цвет заднего фона для body */
                         }}
                     </style>
                     <script type='text/javascript' async

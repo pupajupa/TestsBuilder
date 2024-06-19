@@ -8,6 +8,7 @@ namespace TestsBuilder
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(CalculatorPage), typeof(CalculatorPage));
+            Routing.RegisterRoute(nameof(UserMaterialsPage), typeof(UserMaterialsPage));
             Routing.RegisterRoute(nameof(MaterialsPage), typeof(MaterialsPage));
             Routing.RegisterRoute(nameof(ProfilePage),typeof(ProfilePage));
             Routing.RegisterRoute(nameof(SolutionTestPage),typeof(SolutionTestPage));
