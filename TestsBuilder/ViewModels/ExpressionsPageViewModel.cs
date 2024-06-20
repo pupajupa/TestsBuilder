@@ -111,6 +111,16 @@ namespace TestsBuilder.ViewModels
         }
 
         [RelayCommand]
+        async Task DeleteTest() => await Delete();
+
+        public async Task Delete()
+        {
+            _dbService.DeleteTest(Test.Id);
+            _dbService.ClearCurrentTest();
+            await Shell.Current.GoToAsync(nameof(TestsPage));
+        }
+
+        [RelayCommand]
         async Task GoToResultsPage() => await Results();
         public async Task Results()
         {

@@ -26,8 +26,11 @@
                 <ColumnDefinition Width="0.3*"/>
             </Grid.ColumnDefinitions>
             <Label Text="{Binding Test.Name}" FontSize="40" TextColor="Black" HorizontalOptions="Start" Grid.Column="0" VerticalTextAlignment="Center"/>
-            <Button Text="Результаты" HorizontalOptions="EndAndExpand" Grid.Column="2" BackgroundColor="#7D90D7" TextColor="Black"
+            <HorizontalStackLayout Grid.Column="2" HorizontalOptions="EndAndExpand">
+                <ImageButton Source="clear.png" CornerRadius="10" WidthRequest="28" HeightRequest="28" BackgroundColor="PaleVioletRed" Aspect="AspectFill" Padding="5" Margin="0,0,20,0" Command="{Binding DeleteTestCommand}"/>
+                <Button Text="Результаты" BackgroundColor="#7D90D7" TextColor="Black"
         VerticalOptions="Center" FontSize="18" CornerRadius="20" WidthRequest="190" HeightRequest="28" Command="{Binding GoToResultsPageCommand}"/>
+            </HorizontalStackLayout>
         </Grid>
         <Grid>
             <Grid.ColumnDefinitions>
