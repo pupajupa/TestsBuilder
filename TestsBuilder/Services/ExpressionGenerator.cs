@@ -10,7 +10,7 @@ namespace TestsBuilder.Services
 {
     public class ExpressionGenerator:IExpressionGenerator
     {
-        public List<ExampleVariant> GenerateTasksVariant(string expression, List<BaseAnswer> answers, List<Constraints> constraints, int numberOfTasks, int correctAnswer,int exampleId)
+        public List<ExampleVariant> GenerateTasksVariant(string expression, List<BaseAnswer> answers, List<Constraints> constraintsNoMerged, int numberOfTasks, int correctAnswer,int exampleId)
         {
             Random random = new Random();
             List<ExampleVariant> generatedTasks = new List<ExampleVariant>();
@@ -20,6 +20,7 @@ namespace TestsBuilder.Services
                 ExampleVariant task = new ExampleVariant();
                 Dictionary<char, int> generatedValues = new Dictionary<char, int>();
                 task.ExampleId = exampleId;
+                var constraints = MergeConstraints(constraintsNoMerged);
                 foreach (var constraint in constraints)
                 {
                     int value;
@@ -83,6 +84,41 @@ namespace TestsBuilder.Services
             }
 
             return generatedTasks;
+        }
+        public static List<Constraints> MergeConstraints(List<Constraints> constraints)
+        {
+            var groupedConstraints = constraints.GroupBy(c => c.Letter);
+
+            List<Constraints> mergedConstraints = new List<Constraints>();
+
+            foreach (var group in groupedConstraints)
+            {
+                Constraints mergedConstraint = new Constraints { Letter = group.Key };
+
+                foreach (var constraint in group)
+                {
+                    if (constraint.MinValue != -10000)
+                    {
+                        mergedConstraint.MinValue = constraint.MinValue;
+                    }
+                    if (constraint.MaxValue != -10000)
+                    {
+                        mergedConstraint.MaxValue = constraint.MaxValue;
+                    }
+                    if (constraint.Equals != -10000)
+                    {
+                        mergedConstraint.Equals = constraint.Equals;
+                    }
+                    if (constraint.NoEquals != -10000)
+                    {
+                        mergedConstraint.NoEquals = constraint.NoEquals;
+                    }
+                }
+
+                mergedConstraints.Add(mergedConstraint);
+            }
+
+            return mergedConstraints;
         }
     }
 }

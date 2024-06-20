@@ -6,8 +6,8 @@
              x:DataType="viewmodel:StartPageViewModel"
              xmlns:model="clr-namespace:TestsBuilder.Models"
              BackgroundColor="#99B5EB">
-    <VerticalStackLayout Margin="40,0,20,0">
-        <HorizontalStackLayout>
+    <VerticalStackLayout Margin="0" HorizontalOptions="Center" VerticalOptions="Center">
+        <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
             <Border Stroke="Black"
                 StrokeThickness="3"
                 Background="#DFE4F5"
@@ -16,7 +16,7 @@
                 HeightRequest="190"
                 VerticalOptions="Start"
                 HorizontalOptions="Start"
-                Margin="170,100,0,150">
+                Margin="0,100,0,150">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="20,20,20,20" />
                 </Border.StrokeShape>
@@ -40,14 +40,14 @@
             <Label Text="Test" FontSize="90" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center" Margin="30,0,0,150"/>
             <Label Text="Builder" FontSize="90" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center" Margin="-40,30,0,0"/>
         </HorizontalStackLayout>
-        <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Start">
+        <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
             <Border Stroke="Black"
                     StrokeThickness="1"
                     Background="#7D90D7"
                     Padding="0,-17"
                     HorizontalOptions="Center"
                     HeightRequest="45"
-                    Margin="-20,0,50,0">
+                    Margin="-30,0,50,0">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="20,20,20,20" />
                 </Border.StrokeShape>

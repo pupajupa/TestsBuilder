@@ -270,10 +270,10 @@ namespace TestsBuilder.Services
             var results = Database.Table<TestResult>().Where(tr => tr.TestId == testId).ToList();
             return results;
         }
-        public TestResult GetTestResultByTestId(int testId)
+        public TestResult GetTestResultByTestIdAndUserId(int testId, int userId)
         {
             Init();
-            return Database.Table<TestResult>().FirstOrDefault(ev => ev.TestId == testId);
+            return Database.Table<TestResult>().FirstOrDefault(ev => ev.TestId == testId && ev.StudentId == userId);
         }
         // New method to set (remember) the current student
         public void SetCurrentStudent(string username)

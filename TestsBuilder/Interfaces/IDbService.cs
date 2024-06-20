@@ -49,7 +49,7 @@ namespace TestsBuilder.Interfaces
         void SetCurrentStudent(string username);
         void SetCurrentTeacher(string username);
         void ClearCurrentUser();
-        TestResult GetTestResultByTestId(int testId);
+        TestResult GetTestResultByTestIdAndUserId(int testId, int userId);
         void SetCurrentTest(int testId);
         void SetCurrentExample(int exId);
 

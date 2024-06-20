@@ -42,7 +42,7 @@ namespace TestsBuilder.ViewModels
                     }
                     foreach (var test in tests)
                     {
-                        var res = _dbService.GetTestResultByTestId(test.Id);
+                        var res = _dbService.GetTestResultByTestIdAndUserId(test.Id,_dbService.GetCurrentStudent().Id);
                         TestsWithResults.Add(new TestWithResult { Test = test, Result = res });
                     }
                 }
@@ -83,7 +83,7 @@ namespace TestsBuilder.ViewModels
         async Task GoToSolutionsPage(TestWithResult test)
         {
             _dbService.SetCurrentTest(test.Test.Id);
-            var result = _dbService.GetTestResultByTestId(test.Test.Id);
+            var result = _dbService.GetTestResultByTestIdAndUserId(test.Test.Id, _dbService.GetCurrentStudent().Id);
             if (result != null)
             {
                 if (result.StudentId == _dbService.GetCurrentStudent().Id)
